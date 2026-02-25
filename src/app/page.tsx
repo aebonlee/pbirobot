@@ -1,5 +1,11 @@
-import { redirect } from "next/navigation";
-
 export default function RootPage() {
-  redirect("/ko/");
+  return (
+    <html>
+      <head>
+        <meta httpEquiv="refresh" content="0;url=/ko/" />
+        <link rel="canonical" href="/ko/" />
+      </head>
+      <body />
+    </html>
+  );
 }
