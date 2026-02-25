@@ -36,7 +36,7 @@ export function ProductShowcase() {
             <ScrollReveal key={product.id} delay={index * 0.15}>
               <Card hover className="h-full">
                 {/* Product image placeholder */}
-                <div className="aspect-[4/3] bg-page flex items-center justify-center relative overflow-hidden">
+                <div className="aspect-[4/3] bg-section flex items-center justify-center relative overflow-hidden">
                   {product.badge && (
                     <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
                       {product.badge}

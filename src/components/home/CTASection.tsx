@@ -13,7 +13,7 @@ export function CTASection() {
     <section className="py-24 lg:py-32 bg-section">
       <div className="container-custom">
         <ScrollReveal>
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-page to-accent/10 border border-primary/20 p-12 lg:p-20 text-center">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 via-white to-accent/5 border border-border p-12 lg:p-20 text-center">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />

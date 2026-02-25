@@ -53,7 +53,7 @@ export function Timeline() {
                 }`}
               >
                 {/* Timeline dot */}
-                <div className="absolute left-6 md:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1.5 mt-6 z-10 ring-4 ring-page" />
+                <div className="absolute left-6 md:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1.5 mt-6 z-10 ring-4 ring-white" />
 
                 {/* Content */}
                 <div

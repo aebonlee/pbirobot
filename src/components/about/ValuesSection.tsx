@@ -24,7 +24,7 @@ export function ValuesSection() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {values.map((value, index) => (
             <ScrollReveal key={value.key} delay={index * 0.15}>
-              <div className="text-center p-8 rounded-2xl bg-page border border-border hover:border-primary/30 transition-all duration-300 group">
+              <div className="text-center p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 group">
                 <div className={`mb-6 ${value.color}`}>{value.icon}</div>
                 <h3 className="text-xl font-bold text-text-primary mb-4">
                   {t(`${value.key}.title`)}

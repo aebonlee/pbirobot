@@ -31,7 +31,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-page/90 backdrop-blur-xl border-b border-border"
+          ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm"
           : "bg-transparent"
       )}
     >
@@ -54,7 +54,7 @@ export function Header() {
                   "px-4 py-2 text-sm font-medium rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
                     ? "text-primary bg-primary/10"
-                    : "text-text-secondary hover:text-text-primary hover:bg-white/5"
+                    : "text-text-secondary hover:text-text-primary hover:bg-black/5"
                 )}
               >
                 {t(item.key)}
@@ -96,7 +96,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-section/95 backdrop-blur-xl border-t border-border">
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-border">
           <div className="container-custom py-4 space-y-1">
             {NAV_ITEMS.map((item) => (
               <Link
@@ -106,7 +106,7 @@ export function Header() {
                   "block px-4 py-3 text-sm font-medium rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
                     ? "text-primary bg-primary/10"
-                    : "text-text-secondary hover:text-text-primary hover:bg-white/5"
+                    : "text-text-secondary hover:text-text-primary hover:bg-black/5"
                 )}
               >
                 {t(item.key)}

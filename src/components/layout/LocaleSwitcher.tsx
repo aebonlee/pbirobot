@@ -20,7 +20,7 @@ export function LocaleSwitcher() {
       onClick={toggleLocale}
       className={cn(
         "flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-colors",
-        "text-text-secondary hover:text-text-primary hover:bg-white/5"
+        "text-text-secondary hover:text-text-primary hover:bg-black/5"
       )}
       aria-label="Switch language"
     >

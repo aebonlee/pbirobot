@@ -61,7 +61,7 @@ export default async function LocaleLayout({
   const messages = messagesMap[locale as "ko" | "en"];
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale}>
       <head>
         <link
           rel="stylesheet"

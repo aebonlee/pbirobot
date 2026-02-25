@@ -12,7 +12,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-page to-page" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-white to-white" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
 
       <div className="container-custom relative z-10 pt-20">
@@ -80,7 +80,7 @@ export function HeroSection() {
               </div>
             </div>
             {/* Glow effect */}
-            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-2/3 h-40 bg-primary/20 blur-3xl rounded-full" />
+            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-2/3 h-40 bg-primary/10 blur-3xl rounded-full" />
           </motion.div>
         </div>
       </div>

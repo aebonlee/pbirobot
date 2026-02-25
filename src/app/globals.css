@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-page: #000000;
-  --color-section: #0a0a0a;
-  --color-card: #161618;
-  --color-card-hover: #1e1e20;
-  --color-border: #2a2a2c;
+  --color-page: #ffffff;
+  --color-section: #f7f8fa;
+  --color-card: #ffffff;
+  --color-card-hover: #f0f2f5;
+  --color-border: #e2e4e8;
   --color-primary: #0056b3;
   --color-primary-hover: #004494;
-  --color-accent: #00d4ff;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #c7c7cc;
-  --color-text-muted: #8e8e93;
-  --color-success: #30d158;
-  --color-error: #ff453a;
-  --color-warning: #ffd60a;
+  --color-accent: #0078d4;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
 
   --font-sans: "Pretendard", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
   }
 
@@ -68,7 +68,7 @@
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
