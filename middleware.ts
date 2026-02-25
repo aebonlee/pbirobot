@@ -1,8 +1,7 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./src/i18n/routing";
-
-export default createMiddleware(routing);
+// Middleware disabled for static export (GitHub Pages)
+// next-intl middleware requires server runtime
+export default function middleware() {}
 
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  matcher: [],
 };

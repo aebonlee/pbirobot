@@ -1,20 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { QuoteForm } from "@/components/quote/QuoteForm";
 
-export async function generateMetadata({
+export default async function QuotePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "quote" });
-  return {
-    title: t("title"),
-    description: t("subtitle"),
-  };
-}
+  setRequestLocale(locale);
 
-export default function QuotePage() {
   return (
     <div className="pt-20">
       <QuoteForm />

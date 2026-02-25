@@ -1,20 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Timeline } from "@/components/about/Timeline";
 
-export async function generateMetadata({
+export default async function JourneyPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "journey" });
-  return {
-    title: locale === "ko" ? "연혁" : "Our Journey",
-    description: t("subtitle"),
-  };
-}
+  setRequestLocale(locale);
 
-export default function JourneyPage() {
   return (
     <div className="pt-20">
       <Timeline />

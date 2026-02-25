@@ -1,19 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { CartContent } from "@/components/store/CartContent";
 
-export async function generateMetadata({
+export default async function CartPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "store.cart" });
-  return {
-    title: t("title"),
-  };
-}
+  setRequestLocale(locale);
 
-export default function CartPage() {
   return (
     <div className="pt-20">
       <CartContent />

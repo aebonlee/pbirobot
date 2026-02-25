@@ -1,20 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { StoreContent } from "@/components/store/StoreContent";
 
-export async function generateMetadata({
+export default async function StorePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "store" });
-  return {
-    title: t("title"),
-    description: t("subtitle"),
-  };
-}
+  setRequestLocale(locale);
 
-export default function StorePage() {
   return (
     <div className="pt-20">
       <StoreContent />

@@ -1,20 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { ContactContent } from "@/components/contact/ContactContent";
 
-export async function generateMetadata({
+export default async function ContactPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "contact" });
-  return {
-    title: t("title"),
-    description: t("subtitle"),
-  };
-}
+  setRequestLocale(locale);
 
-export default function ContactPage() {
   return (
     <div className="pt-20">
       <ContactContent />

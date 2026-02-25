@@ -37,18 +37,12 @@ export function QuoteForm() {
   });
 
   const onSubmit = async (data: QuoteFormData) => {
-    try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        setIsSubmitted(true);
-      }
-    } catch {
-      // Handle error
-    }
+    const subject = encodeURIComponent(`[견적요청] ${data.companyName || data.contactName}`);
+    const body = encodeURIComponent(
+      `회사명: ${data.companyName || "-"}\n담당자: ${data.contactName}\n이메일: ${data.email}\n연락처: ${data.phone}\n수영장 유형: ${data.poolType || "-"}\n수영장 크기: ${data.poolSize || "-"}\n수량: ${data.quantity || "-"}\n\n${data.message || ""}`
+    );
+    window.open(`mailto:info@pbirobot.com?subject=${subject}&body=${body}`);
+    setIsSubmitted(true);
   };
 
   if (isSubmitted) {

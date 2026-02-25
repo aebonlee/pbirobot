@@ -32,18 +32,12 @@ export function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        setIsSubmitted(true);
-      }
-    } catch {
-      // Handle error
-    }
+    const subject = encodeURIComponent(data.subject);
+    const body = encodeURIComponent(
+      `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || "-"}\n\n${data.message}`
+    );
+    window.open(`mailto:info@pbirobot.com?subject=${subject}&body=${body}`);
+    setIsSubmitted(true);
   };
 
   if (isSubmitted) {
