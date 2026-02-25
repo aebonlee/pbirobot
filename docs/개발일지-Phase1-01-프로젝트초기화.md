@@ -5,64 +5,84 @@
 
 ---
 
-## 완료 항목
+## 사이트 아키텍처
 
-### 프로젝트 초기화
-- Next.js 16 (App Router, TypeScript) 프로젝트 생성
-- Tailwind CSS v4 + 커스텀 디자인 토큰 설정
-- 의존성: framer-motion, next-intl, zustand, react-hook-form, zod, lucide-react, clsx, tailwind-merge
+### 원래 계획 vs 현재 구조
 
-### i18n 설정 (next-intl)
-- `localePrefix: 'as-needed'` 설정 (한국어: `/about`, 영어: `/en/about`)
-- 미들웨어 설정 완료
-- 한/영 번역 파일 (messages/ko.json, messages/en.json)
+| 항목 | 원래 계획 | 현재 구조 | 변경 이유 |
+|---|---|---|---|
+| **배포** | Vercel (SSR) | GitHub Pages (정적) | 기존 워크플로우 유지 (GitHub Pages + Cloudflare DNS) |
+| **렌더링** | Server-side + Static | 100% Static Export (`output: 'export'`) | GitHub Pages는 정적 호스팅만 지원 |
+| **i18n 라우팅** | Middleware 기반 (`localePrefix: 'as-needed'`) | `generateStaticParams` + `setRequestLocale` | 정적 export에서 middleware 불가 |
+| **URL 구조** | KO: `/about`, EN: `/en/about` | KO: `/ko/about`, EN: `/en/about` | 정적 export는 locale prefix 필수 |
+| **루트 `/`** | middleware가 `/about`으로 라우팅 | `<meta refresh>` → `/ko/` 리다이렉트 | 정적 export 제약 |
+| **폼 제출** | API Route (`/api/contact`) → Resend 이메일 | `mailto:` 링크 방식 | API Routes 정적 export 불가 |
+| **이미지** | Next.js Image Optimization | `unoptimized: true` (원본 그대로) | 정적 export에서 이미지 최적화 불가 |
+| **결제** | Toss Payments SDK | 미구현 (서버 필요) | 정적 사이트에서 결제 서버 불가 |
 
-### 레이아웃 컴포넌트
-- **Header**: 반응형 네비게이션, 스크롤 시 배경 변경, 모바일 메뉴
-- **Footer**: 회사정보, 링크 그룹, 저작권
-- **LocaleSwitcher**: 한/영 전환 버튼
+### 현재 빌드 & 배포 흐름
 
-### UI 컴포넌트
-- Button (4 variants), Card, Accordion, Input, Textarea
-- SectionTitle, ScrollReveal (Framer Motion)
+```
+코드 수정 → git push origin main
+  → GitHub Actions 자동 실행 (.github/workflows/deploy.yml)
+    → npm ci → npm run build (Next.js static export → /out 폴더)
+    → GitHub Pages에 /out 폴더 배포
+    → pbirobot.dreamitbiz.com 에서 서빙 (Cloudflare DNS → GitHub Pages)
+```
 
-### 페이지 구현
-| 페이지 | 경로 | 구성 |
-|---|---|---|
-| 홈 | `/` | Hero, 제품 쇼케이스, 기업 하이라이트, CTA |
-| 회사소개 | `/about` | 비전, 3대 가치, 인증 배지 |
-| 연혁 | `/about/journey` | 타임라인 (2019~2025) |
-| 제품 목록 | `/products` | 제품 카드 + 비교 테이블 |
-| 제품 상세 | `/products/[slug]` | 갤러리, 기능, 스펙 |
-| 스토어 | `/store` | 제품 카드 + 장바구니 담기 |
-| 장바구니 | `/store/cart` | 수량 조절, 합계 |
-| 블로그 | `/blog` | 목록 (4개 포스트) |
-| FAQ | `/faq` | 카테고리별 아코디언 (10개) |
-| 문의 | `/contact` | 폼 + 회사정보 + 지도 |
-| 견적 요청 | `/quote` | 다단계 폼 |
+### 정적 export 핵심 설정
 
-### 데이터 모델링
-- 제품: AquaSense 2 Pro/Ultra (TypeScript 타입 + 정적 데이터)
-- FAQ: 4 카테고리, 10개 항목
-- 연혁: 7개 이벤트 (2019~2025)
+**next.config.ts**
+```ts
+output: "export"       // 정적 HTML 생성
+trailingSlash: true     // /ko/about/ (GitHub Pages 호환)
+images: { unoptimized: true }  // 이미지 최적화 비활성화
+```
 
-### 상태 관리
-- Zustand 장바구니 (localStorage persist)
+**모든 page.tsx에서 setRequestLocale 호출 필수**
+```ts
+export default async function SomePage({ params }) {
+  const { locale } = await params;
+  setRequestLocale(locale);  // next-intl 정적 렌더링 활성화
+  return <Component />;
+}
+```
 
-### API 라우트
-- `POST /api/contact` - 문의 접수
-- `POST /api/quote` - 견적 요청
+**layout.tsx에서 직접 JSON import**
+```ts
+import koMessages from "../../../messages/ko.json";
+import enMessages from "../../../messages/en.json";
+// getMessages() 대신 직접 import (headers() 호출 방지)
+```
 
 ---
 
-## 기술 결정사항
-- Tailwind v4 `@theme inline` 방식으로 커스텀 컬러 정의
-- `<html class="dark">` 상시 적용 (다크모드 고정)
-- Pretendard CDN으로 한국어 폰트 로딩
-- next-intl v4 비동기 params 패턴 적용
+## 현재 구현된 페이지
+
+| 페이지 | 경로 | 구성 |
+|---|---|---|
+| 홈 | `/ko/` `/en/` | Hero, 제품 쇼케이스, 기업 하이라이트, CTA |
+| 회사소개 | `/ko/about/` | 비전, 3대 가치, 인증 배지 |
+| 연혁 | `/ko/about/journey/` | 타임라인 (2019~2025) |
+| 제품 목록 | `/ko/products/` | 제품 카드 + 비교 테이블 |
+| 제품 상세 | `/ko/products/aquasense-2-pro/` | 갤러리, 기능, 스펙 |
+| 스토어 | `/ko/store/` | 제품 카드 + 장바구니 담기 |
+| 장바구니 | `/ko/store/cart/` | 수량 조절, 합계 |
+| 블로그 | `/ko/blog/` | 목록 (4개 포스트) |
+| FAQ | `/ko/faq/` | 카테고리별 아코디언 (10개) |
+| 문의 | `/ko/contact/` | 폼 (mailto) + 회사정보 + 지도 자리 |
+| 견적 요청 | `/ko/quote/` | 견적 폼 (mailto) |
+
+---
+
+## 향후 서버 기능 추가 시
+
+정적 사이트에서 불가능한 기능(결제, 이메일 발송 등)이 필요하면:
+1. **Vercel 전환**: `output: 'export'` 제거, middleware 복원, API routes 복원
+2. **외부 서비스 연동**: Formspree(폼), Stripe(결제) 등 서드파티 활용
+3. **Cloudflare Workers**: 간단한 API를 엣지에서 처리
 
 ## 다음 단계
-- 빌드 검증 및 오류 수정
-- Toss Payments 결제 연동
-- MDX 블로그 시스템
-- Vercel 배포
+- 배경색 블랙 베이스로 변경
+- 실제 제품 이미지/영상 교체
+- 블로그 MDX 콘텐츠 작성

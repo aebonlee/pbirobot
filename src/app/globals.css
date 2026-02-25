@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-page: #141416;
-  --color-section: #1c1c1e;
-  --color-card: #363638;
-  --color-card-hover: #414143;
-  --color-border: #48484a;
+  --color-page: #000000;
+  --color-section: #0a0a0a;
+  --color-card: #161618;
+  --color-card-hover: #1e1e20;
+  --color-border: #2a2a2c;
   --color-primary: #0056b3;
   --color-primary-hover: #004494;
   --color-accent: #00d4ff;
