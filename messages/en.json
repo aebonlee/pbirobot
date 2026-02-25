@@ -1,0 +1,227 @@
+{
+  "common": {
+    "companyName": "PBI Robot",
+    "companyFullName": "PBI Co., Ltd.",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "contactUs": "Contact Us",
+    "getQuote": "Get a Quote",
+    "buyNow": "Buy Now",
+    "addToCart": "Add to Cart",
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "required": "Required",
+    "phone": "+82-2-6949-0136",
+    "email": "info@pbirobot.com",
+    "address": "C-1209, 168 Gasan Digital 1-ro, Geumcheon-gu, Seoul, Korea",
+    "copyright": "© 2026 PBI Robot. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "aboutCompany": "About Us",
+    "journey": "Our Journey",
+    "products": "Products",
+    "store": "Store",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "quote": "Get a Quote"
+  },
+  "home": {
+    "hero": {
+      "title": "Smart Pool Management Starts Here",
+      "subtitle": "AI-Powered Robotic Pool Cleaners",
+      "description": "Experience a new standard in pool cleaning with the AquaSense series. Cutting-edge sensor technology and smart navigation deliver flawless cleaning performance.",
+      "cta": "Explore Products",
+      "ctaSecondary": "Request a Quote"
+    },
+    "showcase": {
+      "title": "AquaSense Series",
+      "subtitle": "Premium Robotic Pool Cleaners",
+      "description": "The perfect harmony of outstanding performance and smart technology"
+    },
+    "highlights": {
+      "title": "Why PBI Robot?",
+      "subtitle": "Creating the future of pool management with innovative technology",
+      "efficiency": {
+        "title": "Maximum Efficiency",
+        "description": "AI path optimization minimizes energy consumption while delivering perfect cleaning results."
+      },
+      "global": {
+        "title": "Global Partnership",
+        "description": "Exporting to over 15 countries worldwide, leading the global pool market."
+      },
+      "innovation": {
+        "title": "Continuous Innovation",
+        "description": "Investing 15% of annual revenue in R&D to develop next-generation technology."
+      }
+    },
+    "cta": {
+      "title": "Leave Your Pool Management to the Robot",
+      "description": "Find the optimal solution through expert consultation.",
+      "button": "Free Consultation"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "A Cleaner World Through Technology",
+      "subtitle": "PBI Robot creates better living environments through robotic technology."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "PBI Robot presents a new paradigm in pool management through advanced robotic technology. Through efficiency, global expansion, and continuous innovation, we are growing into the world's leading pool robotics company."
+    },
+    "values": {
+      "title": "Three Core Values",
+      "efficiency": {
+        "title": "Efficiency",
+        "description": "AI-based smart navigation and energy optimization technology achieve maximum cleaning with minimum resources."
+      },
+      "global": {
+        "title": "Global",
+        "description": "Beyond Korea, PBI Robot's technology is recognized in global markets including the US, Europe, and Southeast Asia."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Continuous R&D investment and patented technology lead the future of the pool robotics industry."
+      }
+    },
+    "certifications": {
+      "title": "Certifications & Awards",
+      "description": "PBI Robot's technology and quality are recognized through various domestic and international certifications and awards."
+    }
+  },
+  "journey": {
+    "title": "Our Journey",
+    "subtitle": "Follow the footsteps of innovation"
+  },
+  "products": {
+    "title": "AquaSense Series",
+    "subtitle": "Cutting-edge Robotic Pool Cleaner Lineup",
+    "compare": "Compare Products",
+    "specs": "Specifications",
+    "features": "Key Features",
+    "gallery": "Gallery",
+    "video": "Watch Video",
+    "price": "Price",
+    "inquire": "Purchase Inquiry"
+  },
+  "store": {
+    "title": "Online Store",
+    "subtitle": "Purchase PBI Robot products online",
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "shippingFree": "Free",
+      "total": "Total",
+      "checkout": "Proceed to Checkout",
+      "continueShopping": "Continue Shopping"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "success": {
+        "title": "Payment Successful!",
+        "description": "A confirmation email has been sent.",
+        "orderNumber": "Order Number"
+      },
+      "fail": {
+        "title": "Payment Failed",
+        "description": "Please try again.",
+        "retry": "Retry Payment"
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Latest news and pool management tips from PBI Robot",
+    "readMore": "Read More",
+    "readTime": "min read",
+    "allPosts": "All Posts",
+    "categories": {
+      "news": "News",
+      "tech": "Technology",
+      "tips": "Tips",
+      "events": "Events"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find quick answers to your questions",
+    "categories": {
+      "product": "Product",
+      "purchase": "Purchase/Shipping",
+      "warranty": "Warranty/Service",
+      "usage": "How to Use"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Feel free to reach out with any questions",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Your inquiry has been submitted successfully.",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "example@email.com",
+      "phonePlaceholder": "+82-10-0000-0000",
+      "subjectPlaceholder": "Enter your subject",
+      "messagePlaceholder": "Enter your message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business Hours",
+      "hoursValue": "Mon-Fri 09:00 - 18:00 KST"
+    },
+    "map": {
+      "title": "How to Find Us"
+    }
+  },
+  "quote": {
+    "title": "Request a Quote",
+    "subtitle": "We'll suggest the optimal solution for your project",
+    "steps": {
+      "info": "Basic Info",
+      "pool": "Pool Info",
+      "product": "Product",
+      "confirm": "Confirm"
+    },
+    "form": {
+      "companyName": "Company Name",
+      "contactName": "Contact Person",
+      "email": "Email",
+      "phone": "Phone",
+      "poolType": "Pool Type",
+      "poolSize": "Pool Size",
+      "quantity": "Quantity",
+      "message": "Additional Requests",
+      "submit": "Submit Quote Request",
+      "success": "Your quote request has been received. We will contact you shortly."
+    }
+  },
+  "footer": {
+    "company": "Company",
+    "products": "Products",
+    "support": "Support",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "businessInfo": "Business Information",
+    "ceo": "CEO: Hong Gildong",
+    "businessNumber": "Business Reg. No.: 000-00-00000"
+  }
+}
