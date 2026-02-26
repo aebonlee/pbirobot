@@ -11,7 +11,7 @@ export function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="bg-section border-t border-border">
+    <footer className="bg-gray-950 text-gray-300">
       <div className="container-custom py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
@@ -20,30 +20,30 @@ export function Footer() {
               <Image
                 src={images.logo}
                 alt="PBI Robot"
-                width={120}
-                height={40}
-                className="h-8 w-auto"
+                width={140}
+                height={48}
+                className="h-10 w-auto brightness-0 invert"
               />
             </Link>
-            <p className="text-sm text-text-muted mb-4 leading-relaxed">
+            <p className="text-sm text-gray-400 mb-4 leading-relaxed">
               {t("common.companyFullName")}
             </p>
             <div className="space-y-2">
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 {t("common.phone")}
               </a>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 {t("common.email")}
               </a>
-              <div className="flex items-start gap-2 text-sm text-text-secondary">
+              <div className="flex items-start gap-2 text-sm text-gray-400">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
                 <span>{t("common.address")}</span>
               </div>
@@ -52,14 +52,14 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4">
+            <h3 className="text-sm font-semibold text-white mb-4">
               {t("footer.company")}
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/about"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.aboutCompany")}
                 </Link>
@@ -67,15 +67,23 @@ export function Footer() {
               <li>
                 <Link
                   href="/about/journey"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.journey")}
                 </Link>
               </li>
               <li>
                 <Link
+                  href="/about/brand"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  {t("nav.brand")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.blog")}
                 </Link>
@@ -85,14 +93,14 @@ export function Footer() {
 
           {/* Product Links */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4">
+            <h3 className="text-sm font-semibold text-white mb-4">
               {t("footer.products")}
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/products"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.products")}
                 </Link>
@@ -100,7 +108,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/store"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.store")}
                 </Link>
@@ -108,7 +116,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/quote"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.quote")}
                 </Link>
@@ -118,14 +126,14 @@ export function Footer() {
 
           {/* Support Links */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-4">
+            <h3 className="text-sm font-semibold text-white mb-4">
               {t("footer.support")}
             </h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/faq"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.faq")}
                 </Link>
@@ -133,7 +141,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
                   {t("nav.contact")}
                 </Link>
@@ -143,20 +151,20 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-text-muted">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-gray-500">
             {t("common.copyright")}
           </p>
           <div className="flex items-center gap-4">
             <Link
               href="/contact"
-              className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+              className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
             >
               {t("footer.privacy")}
             </Link>
             <Link
               href="/contact"
-              className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+              className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
             >
               {t("footer.terms")}
             </Link>

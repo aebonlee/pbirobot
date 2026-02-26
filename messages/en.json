@@ -26,6 +26,7 @@
     "about": "About",
     "aboutCompany": "About Us",
     "journey": "Our Journey",
+    "brand": "Brand",
     "products": "Products",
     "store": "Store",
     "blog": "Blog",
@@ -96,6 +97,25 @@
       "title": "Certifications & Awards",
       "description": "PBI Robot's technology and quality are recognized through various domestic and international certifications and awards."
     }
+  },
+  "brand": {
+    "title": "Brand Story",
+    "subtitle": "Discover the identity of PBI Robot",
+    "logoTitle": "Logo",
+    "logoDescription": "PBI stands for Pure Bot Innovation. The robot character embedded in the letter 'I' intuitively conveys our core brand value: innovation through robotics technology.",
+    "meaningTitle": "Brand Meaning",
+    "pure": "Pure",
+    "pureDesc": "Our commitment to creating clean pool environments",
+    "bot": "Bot",
+    "botDesc": "Smart solutions powered by cutting-edge robotics",
+    "innovation": "Innovation",
+    "innovationDesc": "Continuous technological advancement through R&D",
+    "colorsTitle": "Brand Colors",
+    "blackDesc": "Our primary color symbolizing trust, expertise, and premium quality",
+    "blueDesc": "Accent color representing clean pools and advanced technology",
+    "whiteDesc": "Background color conveying purity and cleanliness",
+    "usageTitle": "Logo Usage Guide",
+    "usageDesc": "The PBI Robot logo is a core brand asset. Please maintain the logo's proportions, colors, and clear space at all times."
   },
   "journey": {
     "title": "Our Journey",

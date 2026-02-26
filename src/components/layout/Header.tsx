@@ -33,8 +33,8 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent"
+          ? "bg-gray-950/95 backdrop-blur-xl border-b border-white/10 shadow-lg"
+          : "bg-gray-950/80 backdrop-blur-md"
       )}
     >
       <div className="container-custom">
@@ -44,9 +44,9 @@ export function Header() {
             <Image
               src={images.logo}
               alt="PBI Robot"
-              width={120}
-              height={40}
-              className="h-8 lg:h-10 w-auto"
+              width={160}
+              height={56}
+              className="h-10 lg:h-14 w-auto brightness-0 invert"
               priority
             />
           </Link>
@@ -60,8 +60,8 @@ export function Header() {
                 className={cn(
                   "px-4 py-2 text-sm font-medium rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
-                    ? "text-primary bg-primary/10"
-                    : "text-text-secondary hover:text-text-primary hover:bg-black/5"
+                    ? "text-white bg-white/15"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 )}
               >
                 {t(item.key)}
@@ -73,7 +73,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/store/cart"
-              className="relative p-2 text-text-secondary hover:text-text-primary transition-colors"
+              className="relative p-2 text-gray-300 hover:text-white transition-colors"
               aria-label="Cart"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -81,14 +81,14 @@ export function Header() {
             <LocaleSwitcher />
             <Link
               href="/quote"
-              className="hidden sm:inline-flex px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg transition-colors"
+              className="hidden sm:inline-flex px-4 py-2 bg-white hover:bg-gray-100 text-gray-900 text-sm font-semibold rounded-lg transition-colors"
             >
               {t("quote")}
             </Link>
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-text-secondary hover:text-text-primary transition-colors"
+              className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
               aria-label="Menu"
             >
               {isMobileMenuOpen ? (
@@ -103,7 +103,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-border">
+        <div className="lg:hidden bg-gray-950/95 backdrop-blur-xl border-t border-white/10">
           <div className="container-custom py-4 space-y-1">
             {NAV_ITEMS.map((item) => (
               <Link
@@ -112,8 +112,8 @@ export function Header() {
                 className={cn(
                   "block px-4 py-3 text-sm font-medium rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
-                    ? "text-primary bg-primary/10"
-                    : "text-text-secondary hover:text-text-primary hover:bg-black/5"
+                    ? "text-white bg-white/15"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 )}
               >
                 {t(item.key)}
@@ -121,7 +121,7 @@ export function Header() {
             ))}
             <Link
               href="/quote"
-              className="block px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors"
+              className="block px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 rounded-lg transition-colors"
             >
               {t("quote")}
             </Link>
