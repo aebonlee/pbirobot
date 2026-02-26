@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { COMPANY_INFO } from "@/lib/constants";
-import { images } from "@/lib/images";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -17,13 +15,9 @@ export function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
-              <Image
-                src={images.logo}
-                alt="PBI Robot"
-                width={140}
-                height={48}
-                className="h-10 w-auto brightness-0 invert"
-              />
+              <span className="text-2xl font-black tracking-tight text-white">
+                Pbi<span className="text-sky-400">Robot</span>
+              </span>
             </Link>
             <p className="text-sm text-gray-400 mb-5 leading-relaxed">
               {t("common.companyFullName")}
