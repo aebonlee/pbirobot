@@ -11,12 +11,12 @@ export function Footer() {
   const t = useTranslations();
 
   return (
-    <footer className="bg-gray-950 text-gray-300">
-      <div className="container-custom py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-[#0a1a2e] text-gray-300">
+      <div className="container-custom py-14 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-4">
+            <Link href="/" className="inline-block mb-5">
               <Image
                 src={images.logo}
                 alt="PBI Robot"
@@ -25,26 +25,26 @@ export function Footer() {
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link>
-            <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+            <p className="text-sm text-gray-400 mb-5 leading-relaxed">
               {t("common.companyFullName")}
             </p>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 text-sky-500/70" />
                 {t("common.phone")}
               </a>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-4 h-4 text-sky-500/70" />
                 {t("common.email")}
               </a>
-              <div className="flex items-start gap-2 text-sm text-gray-400">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+              <div className="flex items-start gap-2.5 text-sm text-gray-400">
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-sky-500/70" />
                 <span>{t("common.address")}</span>
               </div>
             </div>
@@ -52,10 +52,10 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
+            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
               {t("footer.company")}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/about"
@@ -93,10 +93,10 @@ export function Footer() {
 
           {/* Product Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
+            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
               {t("footer.products")}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/products"
@@ -126,10 +126,10 @@ export function Footer() {
 
           {/* Support Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">
+            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
               {t("footer.support")}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/faq"
@@ -151,11 +151,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-500">
             {t("common.copyright")}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Link
               href="/contact"
               className="text-xs text-gray-500 hover:text-gray-300 transition-colors"

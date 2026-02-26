@@ -93,11 +93,11 @@ export function BrandContent() {
                 { key: "innovation", icon: <Lightbulb className="w-8 h-8" />, letter: "I" },
               ].map((item, index) => (
                 <ScrollReveal key={item.key} delay={index * 0.15}>
-                  <div className="text-center p-8 bg-section rounded-2xl border border-border hover:border-gray-900/20 transition-all duration-300 group">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gray-900 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                  <div className="text-center p-8 bg-section rounded-2xl border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
                       {item.icon}
                     </div>
-                    <div className="text-4xl font-black text-gray-900 mb-1">{item.letter}</div>
+                    <div className="text-4xl font-black text-text-primary mb-1">{item.letter}</div>
                     <h3 className="text-lg font-bold text-text-primary mb-2">
                       {t(item.key)}
                     </h3>
