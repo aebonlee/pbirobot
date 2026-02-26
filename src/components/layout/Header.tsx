@@ -38,7 +38,7 @@ export function Header() {
       )}
     >
       <div className="container-custom">
-        <nav className="flex items-center justify-between h-16 lg:h-20">
+        <nav className="flex items-center justify-between h-16 lg:h-24">
           {/* Logo */}
           <Link href="/" className="shrink-0">
             <Image
@@ -52,16 +52,16 @@ export function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-lg transition-colors",
+                  "px-5 py-2.5 text-xl font-bold rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
-                    ? "text-primary bg-primary/8 font-semibold"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                    ? "text-primary"
+                    : "text-gray-700 hover:text-primary"
                 )}
               >
                 {t(item.key)}
@@ -81,7 +81,7 @@ export function Header() {
             <LocaleSwitcher />
             <Link
               href="/quote"
-              className="hidden sm:inline-flex px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-semibold rounded-lg transition-colors"
+              className="hidden sm:inline-flex px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-base lg:text-lg font-bold rounded-lg transition-colors"
             >
               {t("quote")}
             </Link>
@@ -104,16 +104,16 @@ export function Header() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200/60">
-          <div className="container-custom py-4 space-y-1">
+          <div className="container-custom py-3 space-y-0.5">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
                 className={cn(
-                  "block px-4 py-3 text-sm font-medium rounded-lg transition-colors",
+                  "block px-4 py-3.5 text-base font-semibold rounded-xl transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
-                    ? "text-primary bg-primary/8 font-semibold"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    ? "text-primary bg-primary/8"
+                    : "text-gray-700 hover:text-primary hover:bg-gray-50"
                 )}
               >
                 {t(item.key)}
@@ -121,7 +121,7 @@ export function Header() {
             ))}
             <Link
               href="/quote"
-              className="block px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/5 rounded-lg transition-colors"
+              className="block mx-4 mt-2 py-3 text-center text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-xl transition-colors"
             >
               {t("quote")}
             </Link>
