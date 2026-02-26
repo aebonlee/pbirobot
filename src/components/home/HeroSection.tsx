@@ -55,8 +55,8 @@ export function HeroSection() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Overlay: white 85% opacity for readability */}
-      <div className="absolute inset-0 bg-white/[0.85]" />
+      {/* Overlay: white 93% opacity (~7% image visibility) */}
+      <div className="absolute inset-0 bg-white/[0.93]" />
 
       {/* Subtle gradient accents */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-white/50" />
@@ -128,7 +128,7 @@ export function HeroSection() {
             </Link>
           </motion.div>
 
-          {/* Product showcase */}
+          {/* Product showcase - synced with background slide */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,14 +136,25 @@ export function HeroSection() {
             className="mt-16 lg:mt-24 relative"
           >
             <div className="relative mx-auto max-w-4xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border border-border">
-              <Image
-                src={images.hero}
-                alt="AquaSense 2 - AI Robotic Pool Cleaner"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 896px"
-              />
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.2, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={heroSlides[current]}
+                    alt="AquaSense - AI Robotic Pool Cleaner"
+                    fill
+                    className="object-cover"
+                    priority={current === 0}
+                    sizes="(max-width: 768px) 100vw, 896px"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
             {/* Glow effect */}
             <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-2/3 h-40 bg-primary/10 blur-3xl rounded-full" />
