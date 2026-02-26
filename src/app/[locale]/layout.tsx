@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "../globals.css";
-
-import koMessages from "../../../messages/ko.json";
-import enMessages from "../../../messages/en.json";
-
-const messagesMap = { ko: koMessages, en: enMessages } as const;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -34,7 +29,7 @@ export async function generateMetadata({
     description: isKo
       ? "AquaSense 시리즈 - 스마트한 수영장 관리의 시작. AI 기반 로봇 수영장 청소기."
       : "AquaSense Series - Smart pool management starts here. AI-powered robotic pool cleaners.",
-    metadataBase: new URL("https://pbirobot.dreamitbiz.com"),
+    metadataBase: new URL("https://pbirobot.vercel.app"),
     openGraph: {
       type: "website",
       locale: isKo ? "ko_KR" : "en_US",
@@ -58,7 +53,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const messages = messagesMap[locale as "ko" | "en"];
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>

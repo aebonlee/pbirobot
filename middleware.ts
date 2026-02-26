@@ -1,7 +1,8 @@
-// Middleware disabled for static export (GitHub Pages)
-// next-intl middleware requires server runtime
-export default function middleware() {}
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+
+export default createMiddleware(routing);
 
 export const config = {
-  matcher: [],
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

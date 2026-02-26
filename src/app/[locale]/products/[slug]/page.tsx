@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { products, getProductBySlug } from "@/data/products";
@@ -7,6 +8,21 @@ export function generateStaticParams() {
   return products.map((product) => ({
     slug: product.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const product = getProductBySlug(slug);
+  if (!product) return {};
+  const loc = locale as "ko" | "en";
+  return {
+    title: product.name[loc],
+    description: product.description[loc],
+  };
 }
 
 export default async function ProductDetailPage({

@@ -4,7 +4,8 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { ProductImage } from "@/components/shared/ProductImage";
 
 export function HeroSection() {
   const t = useTranslations("home.hero");
@@ -64,20 +65,19 @@ export function HeroSection() {
             </Link>
           </motion.div>
 
-          {/* Product showcase placeholder */}
+          {/* Product showcase */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
             className="mt-16 lg:mt-24 relative"
           >
-            <div className="relative mx-auto max-w-3xl aspect-[16/9] bg-section rounded-2xl border border-border overflow-hidden flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
-                  <Play className="w-8 h-8 text-primary ml-1" />
-                </div>
-                <p className="text-text-muted text-sm">AquaSense 2 Series</p>
-              </div>
+            <div className="relative mx-auto max-w-3xl">
+              <ProductImage
+                variant="pro"
+                size="lg"
+                className="aspect-[16/9] rounded-2xl border border-border shadow-xl"
+              />
             </div>
             {/* Glow effect */}
             <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-2/3 h-40 bg-primary/10 blur-3xl rounded-full" />

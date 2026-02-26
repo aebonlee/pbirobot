@@ -9,7 +9,8 @@ import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { useCartStore } from "@/store/cart-store";
 import { formatPrice } from "@/lib/utils";
-import { ShoppingCart, Cpu } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
+import { ProductImage } from "@/components/shared/ProductImage";
 
 export function StoreContent() {
   const t = useTranslations("store");
@@ -41,19 +42,13 @@ export function StoreContent() {
           {products.map((product, index) => (
             <ScrollReveal key={product.id} delay={index * 0.15}>
               <Card hover className="h-full">
-                <div className="aspect-[4/3] bg-section flex items-center justify-center relative">
-                  {product.badge && (
-                    <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full">
-                      {product.badge}
-                    </span>
-                  )}
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-3 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Cpu className="w-10 h-10 text-primary" />
-                    </div>
-                    <p className="text-text-muted text-sm">{product.name[locale]}</p>
-                  </div>
-                </div>
+                <ProductImage
+                  variant={product.slug === "aquasense-2-pro" ? "pro" : "ultra"}
+                  size="md"
+                  className="aspect-[4/3]"
+                  showBadge
+                  badge={product.badge}
+                />
                 <CardContent className="space-y-4">
                   <div>
                     <h3 className="text-lg font-bold text-text-primary">

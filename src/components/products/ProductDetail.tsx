@@ -8,7 +8,6 @@ import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { formatPrice } from "@/lib/utils";
 import {
   ShoppingCart,
-  Cpu,
   Zap,
   Smartphone,
   Battery,
@@ -16,7 +15,9 @@ import {
   Droplets,
   Building,
   Shield,
+  Cpu,
 } from "lucide-react";
+import { ProductImage } from "@/components/shared/ProductImage";
 
 const iconMap: Record<string, React.ReactNode> = {
   Navigation: <Navigation className="w-6 h-6" />,
@@ -43,19 +44,13 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           {/* Gallery */}
           <ScrollReveal>
-            <div className="aspect-square bg-section rounded-2xl border border-border flex items-center justify-center relative overflow-hidden">
-              {product.badge && (
-                <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
-                  {product.badge}
-                </span>
-              )}
-              <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Cpu className="w-16 h-16 text-primary" />
-                </div>
-                <p className="text-text-muted text-sm">{product.name[locale]}</p>
-              </div>
-            </div>
+            <ProductImage
+              variant={product.slug === "aquasense-2-pro" ? "pro" : "ultra"}
+              size="lg"
+              className="aspect-square rounded-2xl border border-border"
+              showBadge
+              badge={product.badge}
+            />
           </ScrollReveal>
 
           {/* Info */}

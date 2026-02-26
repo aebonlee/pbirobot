@@ -7,8 +7,9 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
+import { ProductImage } from "@/components/shared/ProductImage";
 import { formatPrice } from "@/lib/utils";
-import { ArrowRight, Cpu } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ComparisonTable } from "./ComparisonTable";
 
 export function ProductList() {
@@ -26,19 +27,13 @@ export function ProductList() {
           {products.map((product, index) => (
             <ScrollReveal key={product.id} delay={index * 0.15}>
               <Card hover className="h-full">
-                <div className="aspect-[4/3] bg-section flex items-center justify-center relative">
-                  {product.badge && (
-                    <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full">
-                      {product.badge}
-                    </span>
-                  )}
-                  <div className="text-center">
-                    <div className="w-28 h-28 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Cpu className="w-12 h-12 text-primary" />
-                    </div>
-                    <p className="text-lg font-semibold text-text-primary">{product.name[locale]}</p>
-                  </div>
-                </div>
+                <ProductImage
+                  variant={product.slug === "aquasense-2-pro" ? "pro" : "ultra"}
+                  size="md"
+                  className="aspect-[4/3]"
+                  showBadge
+                  badge={product.badge}
+                />
                 <CardContent className="space-y-4">
                   <p className="text-sm text-text-secondary">{product.tagline[locale]}</p>
                   <p className="text-sm text-text-muted line-clamp-2">{product.description[locale]}</p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { Zap, Globe, Lightbulb } from "lucide-react";
@@ -28,6 +28,7 @@ const highlights = [
 
 export function CompanyHighlights() {
   const t = useTranslations("home.highlights");
+  const locale = useLocale() as "ko" | "en";
 
   return (
     <section className="py-24 lg:py-32">
@@ -48,7 +49,7 @@ export function CompanyHighlights() {
                 </div>
                 <div className="text-3xl font-bold text-accent mb-1">{item.stat}</div>
                 <div className="text-xs text-text-muted mb-4 uppercase tracking-wider">
-                  {item.statLabel.ko}
+                  {item.statLabel[locale]}
                 </div>
                 <h3 className="text-lg font-semibold text-text-primary mb-3">
                   {t(`${item.key}.title`)}
