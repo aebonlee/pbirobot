@@ -46,7 +46,7 @@ export function Header() {
               alt="PBI Robot"
               width={160}
               height={56}
-              className="h-10 lg:h-12 w-auto"
+              className="h-10 lg:h-16 w-auto"
               priority
             />
           </Link>
