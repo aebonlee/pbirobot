@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { NAV_ITEMS } from "@/lib/constants";
+import { images } from "@/lib/images";
 import { cn } from "@/lib/utils";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -38,10 +40,15 @@ export function Header() {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-xl lg:text-2xl font-bold text-text-primary">
-              PBI <span className="text-primary">Robot</span>
-            </span>
+          <Link href="/" className="shrink-0">
+            <Image
+              src={images.logo}
+              alt="PBI Robot"
+              width={120}
+              height={40}
+              className="h-8 lg:h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

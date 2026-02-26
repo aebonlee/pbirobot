@@ -1,3 +1,4 @@
+import logo from "@/images/logo.webp";
 import hero from "@/images/pbi_8.webp";
 import proBanner from "@/images/pbi_2.webp";
 import proLifestyle from "@/images/pbi_4.webp";
@@ -9,6 +10,7 @@ import underwaterClose1 from "@/images/pbi_5.webp";
 import underwaterClose2 from "@/images/pbi_6.webp";
 
 export const images = {
+  logo,
   hero,
   pro: {
     main: proBanner,
