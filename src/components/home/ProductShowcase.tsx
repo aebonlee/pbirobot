@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { products } from "@/data/products";
@@ -7,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
-import { ProductImage } from "@/components/shared/ProductImage";
+import { productImages } from "@/lib/images";
 import { formatPrice } from "@/lib/utils";
 import { ArrowRight, Cpu, Droplets, Shield, Zap } from "lucide-react";
 
@@ -33,58 +34,68 @@ export function ProductShowcase() {
         </ScrollReveal>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {products.map((product, index) => (
-            <ScrollReveal key={product.id} delay={index * 0.15}>
-              <Card hover className="h-full">
-                <ProductImage
-                  variant={product.slug === "aquasense-2-pro" ? "pro" : "ultra"}
-                  size="md"
-                  className="aspect-[4/3]"
-                  showBadge
-                  badge={product.badge}
-                />
-                <CardContent className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-text-primary mb-1">
-                      {product.name[locale]}
-                    </h3>
-                    <p className="text-sm text-text-secondary">
-                      {product.tagline[locale]}
-                    </p>
+          {products.map((product, index) => {
+            const imgs = productImages[product.slug as keyof typeof productImages];
+            return (
+              <ScrollReveal key={product.id} delay={index * 0.15}>
+                <Card hover className="h-full">
+                  <div className="aspect-[4/3] relative overflow-hidden bg-section">
+                    <Image
+                      src={imgs[0]}
+                      alt={product.name[locale]}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    {product.badge && (
+                      <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
+                        {product.badge}
+                      </span>
+                    )}
                   </div>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-text-primary mb-1">
+                        {product.name[locale]}
+                      </h3>
+                      <p className="text-sm text-text-secondary">
+                        {product.tagline[locale]}
+                      </p>
+                    </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    {product.features.slice(0, 4).map((feature, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start gap-2 text-xs text-text-secondary"
-                      >
-                        <span className="text-primary shrink-0">
-                          {iconMap[feature.icon] || <Zap className="w-4 h-4" />}
-                        </span>
-                        <span>{feature.title[locale]}</span>
-                      </div>
-                    ))}
-                  </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      {product.features.slice(0, 4).map((feature, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-2 text-xs text-text-secondary"
+                        >
+                          <span className="text-primary shrink-0">
+                            {iconMap[feature.icon] || <Zap className="w-4 h-4" />}
+                          </span>
+                          <span>{feature.title[locale]}</span>
+                        </div>
+                      ))}
+                    </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-border">
-                    <span className="text-xl font-bold text-accent">
-                      {formatPrice(
-                        locale === "ko" ? product.price.krw : product.price.usd,
-                        locale
-                      )}
-                    </span>
-                    <Link href={`/products/${product.slug}`}>
-                      <Button size="sm" className="gap-1.5">
-                        {t("subtitle")}
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
+                    <div className="flex items-center justify-between pt-4 border-t border-border">
+                      <span className="text-xl font-bold text-accent">
+                        {formatPrice(
+                          locale === "ko" ? product.price.krw : product.price.usd,
+                          locale
+                        )}
+                      </span>
+                      <Link href={`/products/${product.slug}`}>
+                        <Button size="sm" className="gap-1.5">
+                          {t("subtitle")}
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

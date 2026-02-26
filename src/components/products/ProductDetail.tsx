@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Product } from "@/types/product";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
+import { productImages } from "@/lib/images";
 import { formatPrice } from "@/lib/utils";
 import {
   ShoppingCart,
@@ -17,7 +20,7 @@ import {
   Shield,
   Cpu,
 } from "lucide-react";
-import { ProductImage } from "@/components/shared/ProductImage";
+import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ReactNode> = {
   Navigation: <Navigation className="w-6 h-6" />,
@@ -36,6 +39,9 @@ interface ProductDetailProps {
 export function ProductDetail({ product }: ProductDetailProps) {
   const locale = useLocale() as "ko" | "en";
   const t = useTranslations("products");
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  const imgs = productImages[product.slug as keyof typeof productImages];
 
   return (
     <section className="py-24 lg:py-32">
@@ -44,13 +50,46 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           {/* Gallery */}
           <ScrollReveal>
-            <ProductImage
-              variant={product.slug === "aquasense-2-pro" ? "pro" : "ultra"}
-              size="lg"
-              className="aspect-square rounded-2xl border border-border"
-              showBadge
-              badge={product.badge}
-            />
+            <div className="space-y-4">
+              <div className="aspect-square relative overflow-hidden rounded-2xl border border-border bg-section">
+                <Image
+                  src={imgs[selectedImage]}
+                  alt={product.name[locale]}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                {product.badge && (
+                  <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
+                    {product.badge}
+                  </span>
+                )}
+              </div>
+              {/* Thumbnails */}
+              <div className="grid grid-cols-3 gap-3">
+                {imgs.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedImage(i)}
+                    className={cn(
+                      "aspect-[4/3] relative overflow-hidden rounded-lg border-2 transition-all",
+                      selectedImage === i
+                        ? "border-primary shadow-md"
+                        : "border-border hover:border-primary/30"
+                    )}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${product.name[locale]} ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="150px"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
           </ScrollReveal>
 
           {/* Info */}

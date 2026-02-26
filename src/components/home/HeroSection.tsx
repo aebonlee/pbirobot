@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { ProductImage } from "@/components/shared/ProductImage";
+import { images } from "@/lib/images";
 
 export function HeroSection() {
   const t = useTranslations("home.hero");
@@ -72,11 +73,14 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 0.5 }}
             className="mt-16 lg:mt-24 relative"
           >
-            <div className="relative mx-auto max-w-3xl">
-              <ProductImage
-                variant="pro"
-                size="lg"
-                className="aspect-[16/9] rounded-2xl border border-border shadow-xl"
+            <div className="relative mx-auto max-w-4xl aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl border border-border">
+              <Image
+                src={images.hero}
+                alt="AquaSense 2 - AI Robotic Pool Cleaner"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 896px"
               />
             </div>
             {/* Glow effect */}
