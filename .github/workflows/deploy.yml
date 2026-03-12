@@ -33,6 +33,24 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Fix root redirect
+        run: |
+          cat > out/index.html << 'REDIRECT'
+          <!DOCTYPE html>
+          <html lang="ko">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0;url=/ko">
+            <link rel="canonical" href="/ko">
+            <title>PBI Robot - AI 로봇 수영장 청소기</title>
+            <meta name="description" content="AquaSense 시리즈 - 스마트한 수영장 관리의 시작">
+          </head>
+          <body>
+            <p>Redirecting to <a href="/ko">PBI Robot</a>...</p>
+          </body>
+          </html>
+          REDIRECT
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
