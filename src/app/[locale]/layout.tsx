@@ -29,7 +29,7 @@ export async function generateMetadata({
     description: isKo
       ? "AquaSense 시리즈 - 스마트한 수영장 관리의 시작. AI 기반 로봇 수영장 청소기."
       : "AquaSense Series - Smart pool management starts here. AI-powered robotic pool cleaners.",
-    metadataBase: new URL("https://pbirobot.vercel.app"),
+    metadataBase: new URL("https://pbirobot.dreamitbiz.com"),
     openGraph: {
       type: "website",
       locale: isKo ? "ko_KR" : "en_US",
