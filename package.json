@@ -1,5 +1,7 @@
 {
   "name": "pbirobot",
+  "description": "PBI 로봇 플랫폼",
+  "homepage": "https://pbirobot.dreamitbiz.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
