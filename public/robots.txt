@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pbirobot.dreamitbiz.com/sitemap.xml

@@ -19,21 +19,53 @@ export async function generateMetadata({
   const { locale } = await params;
   const isKo = locale === "ko";
 
+  const baseUrl = "https://pbirobot.dreamitbiz.com";
+  const title = isKo
+    ? "PBI Robot - AI 로봇 수영장 청소기"
+    : "PBI Robot - AI Robotic Pool Cleaner";
+  const description = isKo
+    ? "AquaSense 시리즈 - 스마트한 수영장 관리의 시작. AI 기반 로봇 수영장 청소기."
+    : "AquaSense Series - Smart pool management starts here. AI-powered robotic pool cleaners.";
+
   return {
     title: {
-      default: isKo
-        ? "PBI Robot - AI 로봇 수영장 청소기"
-        : "PBI Robot - AI Robotic Pool Cleaner",
+      default: title,
       template: isKo ? "%s | PBI Robot" : "%s | PBI Robot",
     },
-    description: isKo
-      ? "AquaSense 시리즈 - 스마트한 수영장 관리의 시작. AI 기반 로봇 수영장 청소기."
-      : "AquaSense Series - Smart pool management starts here. AI-powered robotic pool cleaners.",
-    metadataBase: new URL("https://pbirobot.dreamitbiz.com"),
+    description,
+    metadataBase: new URL(baseUrl),
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        ko: `${baseUrl}/ko`,
+        en: `${baseUrl}/en`,
+      },
+    },
     openGraph: {
       type: "website",
-      locale: isKo ? "ko_KR" : "en_US",
+      url: `${baseUrl}/${locale}`,
+      title,
+      description,
       siteName: "PBI Robot",
+      locale: isKo ? "ko_KR" : "en_US",
+      images: [
+        {
+          url: `${baseUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: "PBI Robot - AquaSense AI Robotic Pool Cleaner",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${baseUrl}/og-image.png`],
     },
   };
 }

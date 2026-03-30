@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home (Korean - default) -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Products -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/products</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/products</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Product Detail: AquaSense 2 Pro -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-pro</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-pro" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products/aquasense-2-pro" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/products/aquasense-2-pro</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-pro" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products/aquasense-2-pro" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Product Detail: AquaSense 2 Ultra -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-ultra</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-ultra" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products/aquasense-2-ultra" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/products/aquasense-2-ultra</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/products/aquasense-2-ultra" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/products/aquasense-2-ultra" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/about</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About - Brand -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/about/brand</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about/brand" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about/brand" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/about/brand</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about/brand" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about/brand" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- About - Journey -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/about/journey</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about/journey" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about/journey" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/about/journey</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/about/journey" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/about/journey" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/blog</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/blog" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/blog" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/contact" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/contact" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/faq</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/faq" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/faq" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Quote -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/quote</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/quote" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/quote" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/quote</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/quote" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/quote" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Store -->
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/ko/store</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/store" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/store" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pbirobot.dreamitbiz.com/en/store</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://pbirobot.dreamitbiz.com/ko/store" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pbirobot.dreamitbiz.com/en/store" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
