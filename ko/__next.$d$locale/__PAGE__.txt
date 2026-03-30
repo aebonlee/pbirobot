@@ -1,0 +1,9 @@
+1:"$Sreact.fragment"
+2:I[48044,["/_next/static/chunks/5782fc33f428c698.js","/_next/static/chunks/b0887058ad527bd1.js","/_next/static/chunks/31cfdaabc7cf2507.js","/_next/static/chunks/83f56087f0d715d9.js","/_next/static/chunks/4d08d924744f6774.js"],"HeroSection"]
+3:I[93734,["/_next/static/chunks/5782fc33f428c698.js","/_next/static/chunks/b0887058ad527bd1.js","/_next/static/chunks/31cfdaabc7cf2507.js","/_next/static/chunks/83f56087f0d715d9.js","/_next/static/chunks/4d08d924744f6774.js"],"ProductShowcase"]
+4:I[34789,["/_next/static/chunks/5782fc33f428c698.js","/_next/static/chunks/b0887058ad527bd1.js","/_next/static/chunks/31cfdaabc7cf2507.js","/_next/static/chunks/83f56087f0d715d9.js","/_next/static/chunks/4d08d924744f6774.js"],"CompanyHighlights"]
+5:I[56572,["/_next/static/chunks/5782fc33f428c698.js","/_next/static/chunks/b0887058ad527bd1.js","/_next/static/chunks/31cfdaabc7cf2507.js","/_next/static/chunks/83f56087f0d715d9.js","/_next/static/chunks/4d08d924744f6774.js"],"CTASection"]
+6:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+0:{"buildId":"--5QV-QS6kmqz3kpTUQ0f","rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","$L3",null,{}],["$","$L4",null,{}],["$","$L5",null,{}]],[["$","script","script-0",{"src":"/_next/static/chunks/83f56087f0d715d9.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/4d08d924744f6774.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+8:null

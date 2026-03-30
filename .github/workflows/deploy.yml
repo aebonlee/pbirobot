@@ -1,0 +1,71 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Fix root redirect
+        run: |
+          cat > out/index.html << 'REDIRECT'
+          <!DOCTYPE html>
+          <html lang="ko">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0;url=/ko">
+            <link rel="canonical" href="/ko">
+            <title>PBI Robot - AI 수영장 청소 로봇</title>
+            <meta name="description" content="AquaSense 시리즈 - 스마트한 수영장 관리의 시작">
+          </head>
+          <body>
+            <p>Redirecting to <a href="/ko">PBI Robot</a>...</p>
+          </body>
+          </html>
+          REDIRECT
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
