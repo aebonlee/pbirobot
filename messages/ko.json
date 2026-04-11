@@ -193,6 +193,7 @@
       "message": "메시지",
       "submit": "문의 보내기",
       "success": "문의가 성공적으로 접수되었습니다.",
+      "error": "이메일 전송에 실패했습니다. 직접 문의해주세요: pbi240426@gmail.com",
       "namePlaceholder": "홍길동",
       "emailPlaceholder": "example@email.com",
       "phonePlaceholder": "010-0000-0000",
@@ -230,7 +231,8 @@
       "quantity": "수량",
       "message": "추가 요청사항",
       "submit": "견적 요청하기",
-      "success": "견적 요청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다."
+      "success": "견적 요청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.",
+      "error": "이메일 전송에 실패했습니다. 직접 문의해주세요: pbi240426@gmail.com"
     }
   },
   "footer": {

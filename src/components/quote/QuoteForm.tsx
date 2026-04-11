@@ -5,11 +5,13 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { Send, CheckCircle } from "lucide-react";
+import { EMAILJS_CONFIG } from "@/lib/constants";
 
 const quoteSchema = z.object({
   companyName: z.string().optional(),
@@ -27,6 +29,7 @@ type QuoteFormData = z.infer<typeof quoteSchema>;
 export function QuoteForm() {
   const t = useTranslations("quote");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const {
     register,
@@ -37,12 +40,28 @@ export function QuoteForm() {
   });
 
   const onSubmit = async (data: QuoteFormData) => {
-    const subject = encodeURIComponent(`[견적요청] ${data.companyName || data.contactName}`);
-    const body = encodeURIComponent(
-      `회사명: ${data.companyName || "-"}\n담당자: ${data.contactName}\n이메일: ${data.email}\n연락처: ${data.phone}\n수영장 유형: ${data.poolType || "-"}\n수영장 크기: ${data.poolSize || "-"}\n수량: ${data.quantity || "-"}\n\n${data.message || ""}`
-    );
-    window.open(`mailto:info@pbirobot.com?subject=${subject}&body=${body}`);
-    setIsSubmitted(true);
+    try {
+      setError(false);
+      await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.quoteTemplateId,
+        {
+          company_name: data.companyName || "-",
+          contact_name: data.contactName,
+          from_email: data.email,
+          phone: data.phone,
+          pool_type: data.poolType || "-",
+          pool_size: data.poolSize || "-",
+          quantity: data.quantity || "-",
+          message: data.message || "",
+          to_email: "pbi240426@gmail.com",
+        },
+        EMAILJS_CONFIG.publicKey
+      );
+      setIsSubmitted(true);
+    } catch {
+      setError(true);
+    }
   };
 
   if (isSubmitted) {
@@ -121,6 +140,11 @@ export function QuoteForm() {
               label={t("form.message")}
               {...register("message")}
             />
+            {error && (
+              <div className="text-center text-red-500 text-sm">
+                {t("form.error")}
+              </div>
+            )}
             <Button type="submit" size="lg" className="w-full gap-2" disabled={isSubmitting}>
               <Send className="w-4 h-4" />
               {t("form.submit")}

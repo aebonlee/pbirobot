@@ -5,9 +5,11 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Send, CheckCircle } from "lucide-react";
+import { EMAILJS_CONFIG } from "@/lib/constants";
 
 const contactSchema = z.object({
   name: z.string().min(1),
@@ -22,6 +24,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function ContactForm() {
   const t = useTranslations("contact.form");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const {
     register,
@@ -32,12 +35,25 @@ export function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    const subject = encodeURIComponent(data.subject);
-    const body = encodeURIComponent(
-      `이름: ${data.name}\n이메일: ${data.email}\n연락처: ${data.phone || "-"}\n\n${data.message}`
-    );
-    window.open(`mailto:info@pbirobot.com?subject=${subject}&body=${body}`);
-    setIsSubmitted(true);
+    try {
+      setError(false);
+      await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.contactTemplateId,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone || "-",
+          subject: data.subject,
+          message: data.message,
+          to_email: "pbi240426@gmail.com",
+        },
+        EMAILJS_CONFIG.publicKey
+      );
+      setIsSubmitted(true);
+    } catch {
+      setError(true);
+    }
   };
 
   if (isSubmitted) {
@@ -93,6 +109,11 @@ export function ContactForm() {
         error={errors.message?.message}
         {...register("message")}
       />
+      {error && (
+        <div className="text-center text-red-500 text-sm">
+          {t("error")}
+        </div>
+      )}
       <Button type="submit" size="lg" className="w-full gap-2" disabled={isSubmitting}>
         <Send className="w-4 h-4" />
         {t("submit")}

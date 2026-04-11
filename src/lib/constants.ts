@@ -17,6 +17,13 @@ export const NAV_ITEMS = [
   { key: "contact", href: "/contact" },
 ] as const;
 
+export const EMAILJS_CONFIG = {
+  serviceId: "service_xxx",
+  contactTemplateId: "template_contact",
+  quoteTemplateId: "template_quote",
+  publicKey: "xxx",
+} as const;
+
 export const COMPANY_INFO = {
   phone: "02-6949-0136",
   phoneIntl: "+82-2-6949-0136",
