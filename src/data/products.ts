@@ -18,7 +18,7 @@ export const products: Product[] = [
     },
     price: {
       krw: 6000000,
-      usd: 1899,
+      usd: "문의바람",
     },
     images: [
       "/images/products/aquasense-2-pro-1.jpg",
@@ -90,7 +90,7 @@ export const products: Product[] = [
     },
     price: {
       krw: 8000000,
-      usd: 2999,
+      usd: "문의바람",
     },
     images: [
       "/images/products/aquasense-2-ultra-1.jpg",
