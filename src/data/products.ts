@@ -17,7 +17,7 @@ export const products: Product[] = [
       en: "The AquaSense 2 Pro is a premium robotic cleaner that perfectly cleans pool floors, walls, and waterlines with AI-based smart navigation and powerful suction. Features app control, scheduled cleaning, and auto-charging.",
     },
     price: {
-      krw: 2490000,
+      krw: 6000000,
       usd: 1899,
     },
     images: [
@@ -89,7 +89,7 @@ export const products: Product[] = [
       en: "The AquaSense 2 Ultra is a flagship model designed for large commercial pools. In addition to all Pro features, it includes a large filter, extended coverage, multi-pool management, and water quality monitoring sensors.",
     },
     price: {
-      krw: 3990000,
+      krw: 8000000,
       usd: 2999,
     },
     images: [
