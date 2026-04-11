@@ -1,29 +1,29 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { COMPANY_INFO } from "@/lib/constants";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export function CompanyInfoCard() {
   const t = useTranslations("contact.info");
+  const tc = useTranslations("common");
 
   const items = [
     {
       icon: <MapPin className="w-5 h-5" />,
       label: t("address"),
-      value: COMPANY_INFO.address.ko,
+      value: tc("address"),
     },
     {
       icon: <Phone className="w-5 h-5" />,
       label: t("phone"),
-      value: COMPANY_INFO.phone,
-      href: `tel:${COMPANY_INFO.phone}`,
+      value: tc("phone"),
+      href: `tel:${tc("phone")}`,
     },
     {
       icon: <Mail className="w-5 h-5" />,
       label: t("email"),
-      value: COMPANY_INFO.email,
-      href: `mailto:${COMPANY_INFO.email}`,
+      value: tc("email"),
+      href: `mailto:${tc("email")}`,
     },
     {
       icon: <Clock className="w-5 h-5" />,

@@ -15,7 +15,7 @@ export interface Product {
   };
   price: {
     krw: number;
-    usd: number;
+    usd: number | null;
   };
   images: string[];
   videoUrl?: string;

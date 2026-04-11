@@ -24,14 +24,14 @@ export function Footer() {
             </p>
             <div className="space-y-2.5">
               <a
-                href={`tel:${COMPANY_INFO.phone}`}
+                href={`tel:${t("common.phone")}`}
                 className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
               >
                 <Phone className="w-4 h-4 text-sky-500/70" />
                 {t("common.phone")}
               </a>
               <a
-                href={`mailto:${COMPANY_INFO.email}`}
+                href={`mailto:${t("common.email")}`}
                 className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
               >
                 <Mail className="w-4 h-4 text-sky-500/70" />

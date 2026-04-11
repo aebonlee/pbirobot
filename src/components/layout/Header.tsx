@@ -112,7 +112,7 @@ export function Header() {
                 className={cn(
                   "block px-4 py-3.5 text-base font-semibold rounded-xl transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
-                    ? "text-primary bg-primary/8"
+                    ? "text-primary bg-primary/10"
                     : "text-gray-700 hover:text-primary hover:bg-gray-50"
                 )}
               >

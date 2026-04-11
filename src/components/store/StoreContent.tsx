@@ -19,15 +19,22 @@ export function StoreContent() {
   const locale = useLocale() as "ko" | "en";
   const addItem = useCartStore((state) => state.addItem);
 
+  const getPrice = (product: (typeof products)[0]) => {
+    return locale === "ko" ? product.price.krw : product.price.usd;
+  };
+
   const handleAddToCart = (productId: string) => {
     const product = products.find((p) => p.id === productId);
     if (!product) return;
+
+    const price = getPrice(product);
+    if (price === null) return;
 
     addItem({
       productId: product.id,
       slug: product.slug,
       name: product.name[locale],
-      price: locale === "ko" ? product.price.krw : product.price.usd,
+      price,
       image: product.images[0] || "",
     });
   };
@@ -69,16 +76,24 @@ export function StoreContent() {
                       </p>
                     </div>
                     <div className="text-xl font-bold text-accent">
-                      {formatPrice(locale === "ko" ? product.price.krw : product.price.usd, locale)}
+                      {formatPrice(getPrice(product), locale)}
                     </div>
                     <div className="flex gap-3 pt-2">
-                      <Button
-                        onClick={() => handleAddToCart(product.id)}
-                        className="flex-1 gap-2"
-                      >
-                        <ShoppingCart className="w-4 h-4" />
-                        {tc("addToCart")}
-                      </Button>
+                      {getPrice(product) !== null ? (
+                        <Button
+                          onClick={() => handleAddToCart(product.id)}
+                          className="flex-1 gap-2"
+                        >
+                          <ShoppingCart className="w-4 h-4" />
+                          {tc("addToCart")}
+                        </Button>
+                      ) : (
+                        <Link href="/contact">
+                          <Button variant="outline" className="gap-2">
+                            {locale === "ko" ? "문의하기" : "Contact Us"}
+                          </Button>
+                        </Link>
+                      )}
                       <Link href={`/products/${product.slug}`}>
                         <Button variant="outline">{tc("learnMore")}</Button>
                       </Link>

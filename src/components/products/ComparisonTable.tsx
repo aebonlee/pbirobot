@@ -9,7 +9,7 @@ export function ComparisonTable() {
   const locale = useLocale() as "ko" | "en";
 
   const comparisonRows = [
-    { label: { ko: "가격", en: "Price" }, values: products.map((p) => locale === "ko" ? `${(p.price.krw / 10000).toFixed(0)}만원` : `$${p.price.usd}`) },
+    { label: { ko: "가격", en: "Price" }, values: products.map((p) => locale === "ko" ? `${(p.price.krw / 10000).toFixed(0)}만원` : (p.price.usd !== null ? `$${p.price.usd.toLocaleString()}` : "Contact Us")) },
     { label: { ko: "청소 범위", en: "Coverage" }, values: ["150㎡", "300㎡"] },
     { label: { ko: "청소 시간", en: "Runtime" }, values: ["3h", "5h"] },
     { label: { ko: "필터 용량", en: "Filter" }, values: ["5L", "8L"] },

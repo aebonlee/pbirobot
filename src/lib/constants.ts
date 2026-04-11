@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   name: "PBI Robot",
-  url: "https://pbirobot.com",
-  ogImage: "/images/og/default.png",
+  url: "https://pbirobot.dreamitbiz.com",
+  ogImage: "/og-image.png",
   description: {
     ko: "AI 기반 로봇 수영장 청소기 - AquaSense 시리즈",
     en: "AI-Powered Robotic Pool Cleaners - AquaSense Series",
