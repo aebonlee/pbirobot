@@ -9,6 +9,7 @@ import { images } from "@/lib/images";
 import { cn } from "@/lib/utils";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { AuthButton } from "./AuthButton";
 
 export function Header() {
   const t = useTranslations("nav");
@@ -79,6 +80,7 @@ export function Header() {
               <ShoppingCart className="w-5 h-5" />
             </Link>
             <LocaleSwitcher />
+            <AuthButton />
             <Link
               href="/quote"
               className="hidden sm:inline-flex px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-base lg:text-lg font-bold rounded-lg transition-colors"
@@ -119,6 +121,9 @@ export function Header() {
                 {t(item.key)}
               </Link>
             ))}
+            <div className="px-4 py-2">
+              <AuthButton />
+            </div>
             <Link
               href="/quote"
               className="block mx-4 mt-2 py-3 text-center text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-xl transition-colors"

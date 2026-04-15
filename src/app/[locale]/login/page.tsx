@@ -7,7 +7,7 @@ import { useRouter, useParams } from 'next/navigation';
 type TabType = 'login' | 'register';
 
 export default function LoginPage() {
-  const { login, signup, loginWithGoogle, error, loading } = useAuth();
+  const { login, signup, loginWithGoogle, loginWithKakao, error, loading } = useAuth();
   const router = useRouter();
   const params = useParams();
   const locale = (params.locale as string) || 'ko';
@@ -67,6 +67,11 @@ export default function LoginPage() {
   const handleGoogleLogin = async () => {
     setLocalError(null);
     await loginWithGoogle();
+  };
+
+  const handleKakaoLogin = async () => {
+    setLocalError(null);
+    await loginWithKakao();
   };
 
   return (
@@ -226,7 +231,8 @@ export default function LoginPage() {
             {/* Google Login */}
             <button
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700 disabled:opacity-50"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -247,6 +253,20 @@ export default function LoginPage() {
                 />
               </svg>
               Google로 로그인
+            </button>
+
+            {/* Kakao Login */}
+            <button
+              type="button"
+              onClick={handleKakaoLogin}
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition-all mt-3 disabled:opacity-50"
+              style={{ background: '#FEE500', color: '#191919' }}
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M12 3C6.48 3 2 6.36 2 10.44c0 2.62 1.74 4.93 4.36 6.24-.19.7-.69 2.53-.79 2.93-.12.49.18.48.38.35.15-.1 2.44-1.66 3.43-2.33.85.13 1.73.19 2.62.19 5.52 0 10-3.36 10-7.38C22 6.36 17.52 3 12 3z" fill="#191919"/>
+              </svg>
+              카카오로 계속하기
             </button>
           </div>
         </div>
