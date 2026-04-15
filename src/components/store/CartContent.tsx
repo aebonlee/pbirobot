@@ -1,13 +1,10 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useTranslations, useLocale } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import { useCartStore } from "@/store/cart-store";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { formatPrice } from "@/lib/utils";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
-import { useLocale } from "next-intl";
 
 export function CartContent() {
   const t = useTranslations("store.cart");
@@ -20,7 +17,7 @@ export function CartContent() {
         <div className="container-custom text-center">
           <ShoppingBag className="w-16 h-16 text-text-muted mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-text-primary mb-2">{t("empty")}</h2>
-          <Link href="/store">
+          <Link to="/store">
             <Button variant="outline" className="mt-6 gap-2">
               <ArrowLeft className="w-4 h-4" />
               {t("continueShopping")}

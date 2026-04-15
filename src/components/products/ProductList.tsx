@@ -1,8 +1,5 @@
-"use client";
-
-import Image from "next/image";
-import { useTranslations, useLocale } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useTranslations, useLocale } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import { products } from "@/data/products";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -31,12 +28,10 @@ export function ProductList() {
               <ScrollReveal key={product.id} delay={index * 0.15}>
                 <Card hover className="h-full">
                   <div className="aspect-[4/3] relative overflow-hidden bg-section">
-                    <Image
+                    <img
                       src={imgs[0]}
                       alt={product.name[locale]}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                     {product.badge && (
                       <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
@@ -51,7 +46,7 @@ export function ProductList() {
                       <span className="text-xl font-bold text-accent">
                         {formatPrice(locale === "ko" ? product.price.krw : product.price.usd, locale)}
                       </span>
-                      <Link href={`/products/${product.slug}`}>
+                      <Link to={`/products/${product.slug}`}>
                         <Button size="sm" className="gap-1.5">
                           {t("specs")}
                           <ArrowRight className="w-3.5 h-3.5" />

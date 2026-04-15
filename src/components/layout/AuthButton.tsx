@@ -1,7 +1,5 @@
-"use client";
-
 import { useAuth } from "@/contexts/AuthContext";
-import { Link } from "@/i18n/navigation";
+import { Link } from 'react-router-dom';
 import { LogIn, LogOut } from "lucide-react";
 
 export function AuthButton() {
@@ -33,7 +31,7 @@ export function AuthButton() {
 
   return (
     <Link
-      href="/login"
+      to="/login"
       className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
     >
       <LogIn className="w-4 h-4" />

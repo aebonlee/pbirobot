@@ -1,19 +1,9 @@
-"use client";
-
-import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function LocaleSwitcher() {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const toggleLocale = () => {
-    const nextLocale = locale === "ko" ? "en" : "ko";
-    router.replace(pathname, { locale: nextLocale });
-  };
+  const { locale, toggleLocale } = useLanguage();
 
   return (
     <button

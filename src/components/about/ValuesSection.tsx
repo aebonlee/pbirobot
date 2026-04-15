@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { useTranslations } from '@/contexts/LanguageContext';
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { Zap, Globe, Lightbulb } from "lucide-react";

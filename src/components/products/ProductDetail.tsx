@@ -1,9 +1,6 @@
-"use client";
-
 import { useState } from "react";
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useLocale, useTranslations } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import type { Product } from "@/types/product";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
@@ -52,13 +49,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <ScrollReveal>
             <div className="space-y-4">
               <div className="aspect-square relative overflow-hidden rounded-2xl border border-border bg-section">
-                <Image
+                <img
                   src={imgs[selectedImage]}
                   alt={product.name[locale]}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
                 {product.badge && (
                   <span className="absolute top-4 right-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full z-10">
@@ -79,12 +73,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
                         : "border-border hover:border-primary/30"
                     )}
                   >
-                    <Image
+                    <img
                       src={img}
                       alt={`${product.name[locale]} ${i + 1}`}
-                      fill
-                      className="object-cover"
-                      sizes="150px"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </button>
                 ))}
@@ -110,13 +102,13 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Link href="/store">
+                <Link to="/store">
                   <Button size="lg" className="gap-2">
                     <ShoppingCart className="w-4 h-4" />
                     {t("inquire")}
                   </Button>
                 </Link>
-                <Link href="/quote">
+                <Link to="/quote">
                   <Button variant="outline" size="lg">
                     {t("inquire")}
                   </Button>

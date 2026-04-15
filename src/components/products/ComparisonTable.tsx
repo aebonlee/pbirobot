@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from '@/contexts/LanguageContext';
 import { products } from "@/data/products";
 import { Check, X } from "lucide-react";
 

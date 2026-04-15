@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from '@/contexts/LanguageContext';
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/Card";

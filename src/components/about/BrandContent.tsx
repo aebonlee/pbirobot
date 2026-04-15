@@ -1,7 +1,4 @@
-"use client";
-
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations } from '@/contexts/LanguageContext';
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { images } from "@/lib/images";
@@ -51,21 +48,17 @@ export function BrandContent() {
               {/* Logo on white */}
               <div className="space-y-6">
                 <div className="bg-white border border-border rounded-2xl p-12 flex items-center justify-center">
-                  <Image
+                  <img
                     src={images.logo}
                     alt="PBI Robot Logo"
-                    width={240}
-                    height={80}
                     className="w-48 h-auto"
                   />
                 </div>
                 {/* Logo on dark */}
                 <div className="bg-gray-950 rounded-2xl p-12 flex items-center justify-center">
-                  <Image
+                  <img
                     src={images.logo}
                     alt="PBI Robot Logo (Inverted)"
-                    width={240}
-                    height={80}
                     className="w-48 h-auto brightness-0 invert"
                   />
                 </div>
@@ -153,11 +146,9 @@ export function BrandContent() {
                 {/* Minimum size */}
                 <div className="text-center">
                   <div className="bg-white rounded-xl border border-border p-6 mb-3 flex items-center justify-center h-24">
-                    <Image
+                    <img
                       src={images.logo}
                       alt="Minimum size"
-                      width={80}
-                      height={28}
                       className="w-20 h-auto"
                     />
                   </div>
@@ -167,11 +158,9 @@ export function BrandContent() {
                 <div className="text-center">
                   <div className="bg-white rounded-xl border border-border p-6 mb-3 flex items-center justify-center h-24">
                     <div className="border-2 border-dashed border-gray-300 p-3 rounded-lg">
-                      <Image
+                      <img
                         src={images.logo}
                         alt="Clear space"
-                        width={80}
-                        height={28}
                         className="w-16 h-auto"
                       />
                     </div>
@@ -181,11 +170,9 @@ export function BrandContent() {
                 {/* Dark background */}
                 <div className="text-center">
                   <div className="bg-gray-900 rounded-xl p-6 mb-3 flex items-center justify-center h-24">
-                    <Image
+                    <img
                       src={images.logo}
                       alt="Dark background"
-                      width={80}
-                      height={28}
                       className="w-20 h-auto brightness-0 invert"
                     />
                   </div>

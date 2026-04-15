@@ -1,9 +1,6 @@
-"use client";
-
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useTranslations } from '@/contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -44,13 +41,10 @@ export function HeroSection() {
           transition={{ duration: 1.8, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          <Image
+          <img
             src={heroSlides[current]}
             alt=""
-            fill
-            className="object-cover"
-            priority={current === 0}
-            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </motion.div>
       </AnimatePresence>
@@ -115,13 +109,13 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link href="/products">
+            <Link to="/products">
               <Button size="lg" className="gap-2 shadow-lg shadow-primary/25">
                 {t("cta")}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/quote">
+            <Link to="/quote">
               <Button variant="outline" size="lg" className="gap-2 backdrop-blur-sm">
                 {t("ctaSecondary")}
               </Button>
@@ -145,13 +139,10 @@ export function HeroSection() {
                   transition={{ duration: 1.2, ease: "easeInOut" }}
                   className="absolute inset-0"
                 >
-                  <Image
+                  <img
                     src={heroSlides[current]}
                     alt="AquaSense - AI Robotic Pool Cleaner"
-                    fill
-                    className="object-cover"
-                    priority={current === 0}
-                    sizes="(max-width: 768px) 100vw, 896px"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </motion.div>
               </AnimatePresence>

@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { useTranslations } from '@/contexts/LanguageContext';
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 
 export function VisionSection() {

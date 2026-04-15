@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import type { User, Session, AuthError } from '@supabase/supabase-js';
 import { supabase, setSharedSession, getSharedSession, clearSharedSession } from '@/lib/supabase';
@@ -148,7 +146,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   const login = useCallback(async (email: string, password: string): Promise<AuthResult> => {
     if (!supabase) {
-      const msg = 'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.';
+      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
       setError(msg);
       return { error: { message: msg } };
     }
@@ -170,7 +168,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   const signup = useCallback(async (email: string, password: string): Promise<AuthResult> => {
     if (!supabase) {
-      const msg = 'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.';
+      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
       setError(msg);
       return { error: { message: msg } };
     }
@@ -192,7 +190,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   const loginWithGoogle = useCallback(async (): Promise<AuthResult> => {
     if (!supabase) {
-      const msg = 'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.';
+      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
       setError(msg);
       return { error: { message: msg } };
     }
@@ -214,7 +212,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   const loginWithKakao = useCallback(async (): Promise<AuthResult> => {
     if (!supabase) {
-      const msg = 'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.';
+      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
       setError(msg);
       return { error: { message: msg } };
     }
@@ -257,7 +255,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
 
   const resetPassword = useCallback(async (email: string): Promise<AuthResult> => {
     if (!supabase) {
-      const msg = 'Supabase is not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.';
+      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
       setError(msg);
       return { error: { message: msg } };
     }

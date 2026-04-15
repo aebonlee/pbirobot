@@ -1,9 +1,6 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations } from '@/contexts/LanguageContext';
+import { Link, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from "@/lib/constants";
 import { images } from "@/lib/images";
 import { cn } from "@/lib/utils";
@@ -13,7 +10,7 @@ import { AuthButton } from "./AuthButton";
 
 export function Header() {
   const t = useTranslations("nav");
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -41,14 +38,11 @@ export function Header() {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 lg:h-24">
           {/* Logo */}
-          <Link href="/" className="shrink-0">
-            <Image
+          <Link to="/" className="shrink-0">
+            <img
               src={images.logo}
               alt="PBI Robot"
-              width={160}
-              height={56}
               className="h-10 lg:h-16 w-auto"
-              priority
             />
           </Link>
 
@@ -57,7 +51,7 @@ export function Header() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.key}
-                href={item.href}
+                to={item.href}
                 className={cn(
                   "px-5 py-2.5 text-xl font-bold rounded-lg transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
@@ -73,7 +67,7 @@ export function Header() {
           {/* Right Side */}
           <div className="flex items-center gap-1.5">
             <Link
-              href="/store/cart"
+              to="/store/cart"
               className="relative p-2 text-gray-500 hover:text-gray-900 transition-colors"
               aria-label="Cart"
             >
@@ -82,7 +76,7 @@ export function Header() {
             <LocaleSwitcher />
             <AuthButton />
             <Link
-              href="/quote"
+              to="/quote"
               className="hidden sm:inline-flex px-5 py-2.5 bg-primary hover:bg-primary-hover text-white text-base lg:text-lg font-bold rounded-lg transition-colors"
             >
               {t("quote")}
@@ -110,7 +104,7 @@ export function Header() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.key}
-                href={item.href}
+                to={item.href}
                 className={cn(
                   "block px-4 py-3.5 text-base font-semibold rounded-xl transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
@@ -125,7 +119,7 @@ export function Header() {
               <AuthButton />
             </div>
             <Link
-              href="/quote"
+              to="/quote"
               className="block mx-4 mt-2 py-3 text-center text-base font-bold text-white bg-primary hover:bg-primary-hover rounded-xl transition-colors"
             >
               {t("quote")}
