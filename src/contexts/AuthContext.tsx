@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, useMemo } 
 import type { User, Session, AuthError } from '@supabase/supabase-js';
 import { supabase, setSharedSession, getSharedSession, clearSharedSession } from '@/lib/supabase';
 import { ADMIN_EMAILS } from '@/config/admin';
+import { useIdleTimeout } from '../hooks/useIdleTimeout';
 
 interface AccountBlock {
   status: string;
@@ -138,6 +139,15 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
         }
       }
     );
+
+
+  // 10분 무동작 세션 타임아웃
+  useIdleTimeout({
+    enabled: !!user,
+    onTimeout: () => {
+      clearSharedSession();
+    },
+  });
 
     return () => {
       subscription.unsubscribe();
