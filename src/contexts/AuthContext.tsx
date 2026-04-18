@@ -140,15 +140,6 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       }
     );
 
-
-  // 10분 무동작 세션 타임아웃
-  useIdleTimeout({
-    enabled: !!user,
-    onTimeout: () => {
-      clearSharedSession();
-    },
-  });
-
     return () => {
       subscription.unsubscribe();
     };
@@ -308,6 +299,15 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     logout,
     resetPassword
   }), [user, session, loading, error, isAdmin, accountBlock, clearAccountBlock, login, signup, loginWithGoogle, loginWithKakao, logout, resetPassword]);
+
+
+  // 10분 무동작 세션 타임아웃
+  useIdleTimeout({
+  enabled: !!user,
+  onTimeout: () => {
+  clearSharedSession();
+  },
+  });
 
   return (
     <AuthContext.Provider value={value}>
