@@ -3,6 +3,7 @@ import type { User, Session, AuthError } from '@supabase/supabase-js';
 import { supabase, setSharedSession, getSharedSession, clearSharedSession } from '@/lib/supabase';
 import { ADMIN_EMAILS } from '@/config/admin';
 import { useIdleTimeout } from '../hooks/useIdleTimeout';
+import ProfileCompleteModal from '../components/ProfileCompleteModal';
 
 interface AccountBlock {
   status: string;
@@ -45,8 +46,19 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [accountBlock, setAccountBlock] = useState<AccountBlock | null>(null);
+  const [_userProfile, _setUserProfile] = useState<any>(null);
 
   const clearAccountBlock = useCallback(() => setAccountBlock(null), []);
+
+  const _loadUserProfile = useCallback(async (userId: string) => {
+    if (!supabase || !userId) return;
+    const { data } = await supabase
+      .from('user_profiles')
+      .select('name, phone')
+      .eq('id', userId)
+      .single();
+    _setUserProfile(data);
+  }, []);
 
   const handlePostAuth = useCallback(async (userId: string) => {
     if (!supabase || !userId) return;
@@ -108,6 +120,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
       if (u) {
         if (currentSession?.refresh_token) setSharedSession(currentSession.refresh_token);
         handlePostAuth(u.id);
+        _loadUserProfile(u.id);
       } else {
         const rt = getSharedSession();
         if (rt) {
@@ -136,6 +149,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
             .eq('id', u.id)
             .then(() => {});
           handlePostAuth(u.id);
+          _loadUserProfile(u.id);
         }
       }
     );
@@ -143,7 +157,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     return () => {
       subscription.unsubscribe();
     };
-  }, [handlePostAuth]);
+  }, [handlePostAuth, _loadUserProfile]);
 
   const login = useCallback(async (email: string, password: string): Promise<AuthResult> => {
     if (!supabase) {
@@ -281,6 +295,13 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     (user as unknown as Record<string, Array<Record<string, Record<string, string>>>>)?.identities?.[0]?.identity_data?.email,
   ].filter(Boolean).map((e) => (e as string).toLowerCase());
   const isAdmin = allEmails.some((e: string) => ADMIN_EMAILS.includes(e));
+  const needsProfileCompletion = !!user && !!_userProfile && (!_userProfile.name || !_userProfile.phone);
+
+  const refreshProfile = useCallback(async () => {
+    if (user) {
+      await _loadUserProfile(user.id);
+    }
+  }, [user, _loadUserProfile]);
 
   const value = useMemo((): AuthContextValue => ({
     user,
@@ -312,6 +333,9 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
   return (
     <AuthContext.Provider value={value}>
       {children}
+      {needsProfileCompletion && user && (
+        <ProfileCompleteModal user={user} onComplete={refreshProfile} />
+      )}
     </AuthContext.Provider>
   );
 }
