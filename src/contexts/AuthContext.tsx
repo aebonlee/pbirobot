@@ -295,7 +295,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.ReactElemen
     (user as unknown as Record<string, Array<Record<string, Record<string, string>>>>)?.identities?.[0]?.identity_data?.email,
   ].filter(Boolean).map((e) => (e as string).toLowerCase());
   const isAdmin = allEmails.some((e: string) => ADMIN_EMAILS.includes(e));
-  const needsProfileCompletion = !!user && !!_userProfile && (!_userProfile.name || !_userProfile.phone);
+  const needsProfileCompletion = !!user && !!_userProfile && !_userProfile.name;
 
   const refreshProfile = useCallback(async () => {
     if (user) {
