@@ -1,168 +1,77 @@
-import { useTranslations } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { COMPANY_INFO } from "@/lib/constants";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from '../../contexts/LanguageContext';
+import site from '../../config/site';
+import type { ReactElement, ChangeEvent } from 'react';
 
-export function Footer() {
-  const t = useTranslations();
+const Footer = (): ReactElement => {
+  const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#0a1a2e] text-gray-300">
-      <div className="container-custom py-14 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-5">
-              <span className="text-2xl font-black tracking-tight text-white">
-                PBI<span className="text-sky-400">Robot</span>
-              </span>
-            </Link>
-            <p className="text-sm text-gray-400 mb-5 leading-relaxed">
-              {t("common.companyFullName")}
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-grid">
+          <div>
+            <div className="footer-brand-mark">{site.name}</div>
+            <p className="footer-tag">
+              {t('footer.tagline')}.
+              DreamIT Biz Group이 운영합니다.
             </p>
-            <div className="space-y-2.5">
-              <a
-                href={`tel:${t("common.phone")}`}
-                className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
-              >
-                <Phone className="w-4 h-4 text-sky-500/70" />
-                {t("common.phone")}
-              </a>
-              <a
-                href={`mailto:${t("common.email")}`}
-                className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-sky-400 transition-colors"
-              >
-                <Mail className="w-4 h-4 text-sky-500/70" />
-                {t("common.email")}
-              </a>
-              <div className="flex items-start gap-2.5 text-sm text-gray-400">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-sky-500/70" />
-                <span>{t("common.address")}</span>
-              </div>
+            <div className="company-info">
+              <p><strong>{site.company.name}</strong></p>
+              <p>대표이사: {site.company.ceo}</p>
+              <p>사업자등록번호: {site.company.bizNumber}</p>
             </div>
           </div>
-
-          {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
-              {t("footer.company")}
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  to="/about"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.aboutCompany")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about/journey"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.journey")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about/brand"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.brand")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.blog")}
-                </Link>
-              </li>
+            <h5>{t('footer.quickLinks')}</h5>
+            <ul>
+              {site.footerLinks.map((link, i) => (
+                <li key={i}>
+                  <Link to={link.path}>{t(link.labelKey)}</Link>
+                </li>
+              ))}
             </ul>
           </div>
-
-          {/* Product Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
-              {t("footer.products")}
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  to="/products"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.products")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/store"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.store")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/quote"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.quote")}
-                </Link>
-              </li>
+            <h5>패밀리</h5>
+            <ul>
+              <li><a href={site.parentSite.url} target="_blank" rel="noopener noreferrer">{site.parentSite.name}</a></li>
+              {site.familySites.map((s, i) => (
+                <li key={i}><a href={s.url} target="_blank" rel="noopener noreferrer">{s.name}</a></li>
+              ))}
             </ul>
           </div>
-
-          {/* Support Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-wide mb-5">
-              {t("footer.support")}
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  to="/faq"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.faq")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t("nav.contact")}
-                </Link>
-              </li>
+            <h5>문의</h5>
+            <ul>
+              <li>{site.company.email}</li>
+              <li>{site.company.phone}</li>
+              {site.company.businessHours && <li className="footer-muted">{site.company.businessHours}</li>}
             </ul>
+            <div className="footer-family">
+              <select
+                defaultValue=""
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  if (e.target.value) window.open(e.target.value, '_blank');
+                  e.target.value = '';
+                }}
+              >
+                <option value="" disabled>Family Site</option>
+                <option value={site.parentSite.url}>{site.parentSite.name} (본사이트)</option>
+                {site.familySites.map((s, i) => (
+                  <option key={i} value={s.url}>{s.name}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-gray-500">
-            {t("common.copyright")}
-          </p>
-          <div className="flex items-center gap-6">
-            <Link
-              to="/contact"
-              className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-            >
-              {t("footer.privacy")}
-            </Link>
-            <Link
-              to="/contact"
-              className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-            >
-              {t("footer.terms")}
-            </Link>
-          </div>
+        <div className="footer-bottom">
+          <span>&copy; 2025 &mdash; {new Date().getFullYear()} PBI Robot &middot; All rights reserved</span>
+          <span className="footer-version">v.2026.05 &middot; Editorial</span>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

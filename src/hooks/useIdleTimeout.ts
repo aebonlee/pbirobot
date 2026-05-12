@@ -1,15 +1,9 @@
-'use client'
-
 import { useEffect, useRef, useCallback } from 'react'
 
 interface UseIdleTimeoutOptions {
-  /** 자동 로그아웃 시간 (ms). 기본값 10분 */
   timeout?: number
-  /** 타임아웃 전 경고 시점 (ms). 기본값 1분 전 */
   warningBefore?: number
-  /** 타임아웃 시 호출할 콜백 */
   onTimeout: () => void
-  /** 훅 활성화 여부. false면 타이머 비활성 */
   enabled?: boolean
 }
 

@@ -1,351 +1,199 @@
-import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
-import type { User, Session, AuthError } from '@supabase/supabase-js';
-import { supabase, setSharedSession, getSharedSession, clearSharedSession } from '@/lib/supabase';
-import { ADMIN_EMAILS } from '@/config/admin';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactElement } from 'react';
+import type { User } from '@supabase/supabase-js';
+import getSupabase from '../utils/supabase';
+import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
+import { ADMIN_EMAILS } from '../config/admin';
+import type { UserProfile, AccountBlock } from '../types';
 import { useIdleTimeout } from '../hooks/useIdleTimeout';
 import ProfileCompleteModal from '../components/ProfileCompleteModal';
-
-interface AccountBlock {
-  status: string;
-  reason: string;
-  suspended_until: string | null;
-}
-
-interface AuthResult {
-  data?: unknown;
-  error?: { message: string } | AuthError | null;
-}
+import site from '../config/site';
 
 interface AuthContextValue {
   user: User | null;
-  session: Session | null;
+  profile: UserProfile | null;
   loading: boolean;
-  error: string | null;
-  isAuthenticated: boolean;
+  isLoggedIn: boolean;
   isAdmin: boolean;
-  isSupabaseConfigured: boolean;
+  needsProfileCompletion: boolean;
+  signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
   accountBlock: AccountBlock | null;
   clearAccountBlock: () => void;
-  login: (email: string, password: string) => Promise<AuthResult>;
-  signup: (email: string, password: string) => Promise<AuthResult>;
-  loginWithGoogle: () => Promise<AuthResult>;
-  loginWithKakao: () => Promise<AuthResult>;
-  logout: () => Promise<{ error: AuthError | null }>;
-  resetPassword: (email: string) => Promise<AuthResult>;
 }
 
-const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const AuthContext = createContext<AuthContextValue | null>(null);
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-export function AuthProvider({ children }: AuthProviderProps): React.ReactElement {
+export const AuthProvider = ({ children }: AuthProviderProps): ReactElement => {
   const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [loading, setLoading] = useState(true);
   const [accountBlock, setAccountBlock] = useState<AccountBlock | null>(null);
-  const [_userProfile, _setUserProfile] = useState<any>(null);
 
-  const clearAccountBlock = useCallback(() => setAccountBlock(null), []);
-
-  const _loadUserProfile = useCallback(async (userId: string) => {
-    if (!supabase || !userId) return;
-    const { data } = await supabase
-      .from('user_profiles')
-      .select('name, phone')
-      .eq('id', userId)
-      .single();
-    _setUserProfile(data);
-  }, []);
-
-  const handlePostAuth = useCallback(async (userId: string) => {
-    if (!supabase || !userId) return;
-
-    const currentDomain = window.location.hostname;
-    const { data } = await supabase
-      .from('user_profiles')
-      .select('signup_domain, visited_sites')
-      .eq('id', userId)
-      .single();
-
-    if (data) {
+  const loadProfile = useCallback(async (authUser: User | null) => {
+    if (!authUser) {
+      setProfile(null);
+      return;
+    }
+    let p = await getProfile(authUser.id);
+    if (!p) {
+      const client = getSupabase();
+      if (client) {
+        const meta = authUser.user_metadata || {};
+        const currentDomain = window.location.hostname;
+        const { data } = await client.from('user_profiles').insert({
+          id: authUser.id,
+          email: authUser.email || '',
+          name: meta.full_name || meta.name || '',
+          display_name: meta.full_name || meta.name || '',
+          phone: '',
+          provider: authUser.app_metadata?.provider || 'email',
+          signup_domain: currentDomain,
+          visited_sites: [currentDomain],
+          role: 'member',
+        }).select().single();
+        if (data) p = data as UserProfile;
+      }
+    }
+    if (p) {
       const updates: Record<string, unknown> = {};
-      if (!data.signup_domain) updates.signup_domain = currentDomain;
-      const sites = Array.isArray(data.visited_sites) ? data.visited_sites as string[] : [];
+      const currentDomain = window.location.hostname;
+      if (!p.signup_domain) updates.signup_domain = currentDomain;
+      if (!p.role || p.role === 'user') updates.role = 'member';
+      const sites = Array.isArray(p.visited_sites) ? p.visited_sites : [];
       if (!sites.includes(currentDomain)) {
         updates.visited_sites = [...sites, currentDomain];
       }
       if (Object.keys(updates).length > 0) {
-        supabase.from('user_profiles').update(updates).eq('id', userId).then(() => {});
+        try {
+          const updated = await updateProfile(authUser.id, updates);
+          setProfile(updated);
+        } catch {
+          setProfile(p);
+        }
+      } else {
+        setProfile(p);
       }
     }
 
     try {
-      const { data: statusData } = await supabase.rpc('check_user_status', {
-        target_user_id: userId,
-        current_domain: currentDomain,
-      });
-      if (statusData && statusData.status && statusData.status !== 'active') {
-        setAccountBlock({
-          status: statusData.status,
-          reason: statusData.reason || '',
-          suspended_until: statusData.suspended_until || null,
+      const client = getSupabase();
+      if (client) {
+        const { data: statusData } = await client.rpc('check_user_status', {
+          target_user_id: authUser.id,
+          current_domain: window.location.hostname,
         });
-        await supabase.auth.signOut();
-        setUser(null);
-        setSession(null);
-        return;
+        if (statusData && statusData.status && statusData.status !== 'active') {
+          setAccountBlock({
+            status: statusData.status,
+            reason: statusData.reason || '',
+            suspended_until: statusData.suspended_until || null,
+          });
+          await authSignOut();
+          setUser(null);
+          setProfile(null);
+          return;
+        }
       }
     } catch {
-      // check_user_status function may not exist
+      // check_user_status 함수 미존재 시 무시
     }
   }, []);
 
   useEffect(() => {
-    if (!supabase) {
+    const client = getSupabase();
+    if (!client) {
       setLoading(false);
       return;
     }
 
-    supabase.auth.getSession().then(async ({ data: { session: currentSession }, error: sessionError }) => {
-      if (sessionError) {
-        console.error('Error getting session:', sessionError.message);
-        setError(sessionError.message);
-      }
-      setSession(currentSession);
-      const u = currentSession?.user ?? null;
+    const { data: { subscription } } = client.auth.onAuthStateChange((event, session) => {
+      const u = session?.user ?? null;
       setUser(u);
       if (u) {
-        if (currentSession?.refresh_token) setSharedSession(currentSession.refresh_token);
-        handlePostAuth(u.id);
-        _loadUserProfile(u.id);
-      } else {
-        const rt = getSharedSession();
-        if (rt) {
-          try {
-            const { data } = await supabase!.auth.refreshSession({ refresh_token: rt });
-            if (!data.session) clearSharedSession();
-          } catch { clearSharedSession(); }
-        }
-      }
-      setLoading(false);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, newSession) => {
-        if (newSession?.refresh_token) setSharedSession(newSession.refresh_token);
-        if (event === 'SIGNED_OUT') clearSharedSession();
-
-        setSession(newSession);
-        const u = newSession?.user ?? null;
-        setUser(u);
-        setLoading(false);
-        setError(null);
-        if (event === 'SIGNED_IN' && u) {
-          supabase!.from('user_profiles')
+        loadProfile(u);
+        if (event === 'SIGNED_IN') {
+          client.from('user_profiles')
             .update({ last_sign_in_at: new Date().toISOString() })
             .eq('id', u.id)
             .then(() => {});
-          handlePostAuth(u.id);
-          _loadUserProfile(u.id);
         }
+      } else {
+        setProfile(null);
       }
-    );
+      if (event === 'INITIAL_SESSION') {
+        setLoading(false);
+      }
+    });
+
+    const fallbackTimer = setTimeout(() => {
+      setLoading((prev) => {
+        if (prev) console.warn('Auth: INITIAL_SESSION timeout, forcing loading=false');
+        return false;
+      });
+    }, 5000);
 
     return () => {
+      clearTimeout(fallbackTimer);
       subscription.unsubscribe();
     };
-  }, [handlePostAuth, _loadUserProfile]);
+  }, [loadProfile]);
 
-  const login = useCallback(async (email: string, password: string): Promise<AuthResult> => {
-    if (!supabase) {
-      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
-      setError(msg);
-      return { error: { message: msg } };
-    }
-
-    setError(null);
-    setLoading(true);
-
-    const { data, error: loginError } = await supabase.auth.signInWithPassword({ email, password });
-
-    setLoading(false);
-
-    if (loginError) {
-      setError(loginError.message);
-      return { error: loginError };
-    }
-
-    return { data };
-  }, []);
-
-  const signup = useCallback(async (email: string, password: string): Promise<AuthResult> => {
-    if (!supabase) {
-      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
-      setError(msg);
-      return { error: { message: msg } };
-    }
-
-    setError(null);
-    setLoading(true);
-
-    const { data, error: signupError } = await supabase.auth.signUp({ email, password });
-
-    setLoading(false);
-
-    if (signupError) {
-      setError(signupError.message);
-      return { error: signupError };
-    }
-
-    return { data };
-  }, []);
-
-  const loginWithGoogle = useCallback(async (): Promise<AuthResult> => {
-    if (!supabase) {
-      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
-      setError(msg);
-      return { error: { message: msg } };
-    }
-
-    setError(null);
-
-    const { data, error: googleError } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin }
-    });
-
-    if (googleError) {
-      setError(googleError.message);
-      return { error: googleError };
-    }
-
-    return { data };
-  }, []);
-
-  const loginWithKakao = useCallback(async (): Promise<AuthResult> => {
-    if (!supabase) {
-      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
-      setError(msg);
-      return { error: { message: msg } };
-    }
-
-    setError(null);
-
-    const { data, error: kakaoError } = await supabase.auth.signInWithOAuth({
-      provider: 'kakao',
-      options: { redirectTo: window.location.origin }
-    });
-
-    if (kakaoError) {
-      setError(kakaoError.message);
-      return { error: kakaoError };
-    }
-
-    return { data };
-  }, []);
-
-  const logout = useCallback(async (): Promise<{ error: AuthError | null }> => {
-    if (!supabase) {
-      setUser(null);
-      setSession(null);
-      return { error: null };
-    }
-
-    setError(null);
-
-    const { error: logoutError } = await supabase.auth.signOut();
-
-    if (logoutError) {
-      setError(logoutError.message);
-      return { error: logoutError };
-    }
-
+  const signOut = useCallback(async () => {
+    await authSignOut();
     setUser(null);
-    setSession(null);
-    return { error: null };
+    setProfile(null);
   }, []);
 
-  const resetPassword = useCallback(async (email: string): Promise<AuthResult> => {
-    if (!supabase) {
-      const msg = 'Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.';
-      setError(msg);
-      return { error: { message: msg } };
-    }
-
-    setError(null);
-
-    const { data, error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`
-    });
-
-    if (resetError) {
-      setError(resetError.message);
-      return { error: resetError };
-    }
-
-    return { data };
-  }, []);
+  const refreshProfile = useCallback(async () => {
+    if (user) await loadProfile(user);
+  }, [user, loadProfile]);
 
   const allEmails = [
     user?.email,
-    (user as unknown as Record<string, Record<string, string>>)?.user_metadata?.email,
-    (user as unknown as Record<string, Array<Record<string, Record<string, string>>>>)?.identities?.[0]?.identity_data?.email,
-  ].filter(Boolean).map((e) => (e as string).toLowerCase());
-  const isAdmin = allEmails.some((e: string) => ADMIN_EMAILS.includes(e));
-  const needsProfileCompletion = !!user && !!_userProfile && !_userProfile.name;
+    user?.user_metadata?.email as string | undefined,
+    (user?.identities?.[0]?.identity_data as Record<string, unknown> | undefined)?.email as string | undefined,
+    profile?.email,
+  ].filter((e): e is string => Boolean(e)).map((e) => e.toLowerCase());
+  const isAdmin = allEmails.some((e) => ADMIN_EMAILS.includes(e));
+  const isLoggedIn = !!user;
+  const needsProfileCompletion = isLoggedIn && !!profile && !profile.name;
 
-  const refreshProfile = useCallback(async () => {
-    if (user) {
-      await _loadUserProfile(user.id);
-    }
-  }, [user, _loadUserProfile]);
-
-  const value = useMemo((): AuthContextValue => ({
-    user,
-    session,
-    loading,
-    error,
-    isAuthenticated: !!user,
-    isAdmin,
-    isSupabaseConfigured: !!supabase,
-    accountBlock,
-    clearAccountBlock,
-    login,
-    signup,
-    loginWithGoogle,
-    loginWithKakao,
-    logout,
-    resetPassword
-  }), [user, session, loading, error, isAdmin, accountBlock, clearAccountBlock, login, signup, loginWithGoogle, loginWithKakao, logout, resetPassword]);
-
-
-  // 10분 무동작 세션 타임아웃
   useIdleTimeout({
-  enabled: !!user,
-  onTimeout: () => {
-  clearSharedSession();
-  },
+    enabled: isLoggedIn,
+    onTimeout: () => {
+      authSignOut().catch(() => {});
+    },
   });
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      profile,
+      loading,
+      isLoggedIn,
+      isAdmin,
+      needsProfileCompletion,
+      signOut,
+      refreshProfile,
+      accountBlock,
+      clearAccountBlock: () => setAccountBlock(null),
+    }}>
       {children}
-      {needsProfileCompletion && user && (
-        <ProfileCompleteModal user={user} onComplete={refreshProfile} />
+      {needsProfileCompletion && (
+        <ProfileCompleteModal user={user!} onComplete={refreshProfile} />
       )}
     </AuthContext.Provider>
   );
-}
+};
 
-export function useAuth(): AuthContextValue {
+export const useAuth = (): AuthContextValue => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
   }
   return context;
-}
-
-export default AuthContext;
+};

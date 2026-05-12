@@ -1,95 +1,46 @@
-import { createContext, useContext, useState, useCallback, useMemo } from 'react';
-import koMessages from '../../messages/ko.json';
-import enMessages from '../../messages/en.json';
-
-type Locale = 'ko' | 'en';
-type Messages = Record<string, unknown>;
+import { createContext, useContext, useState, type ReactElement } from 'react';
+import { translations } from '../utils/translations';
+import type { Language } from '../types';
 
 interface LanguageContextValue {
-  locale: Locale;
-  setLocale: (locale: Locale) => void;
-  toggleLocale: () => void;
-  messages: Messages;
+  language: Language;
+  toggleLanguage: () => void;
+  t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-const allMessages: Record<Locale, Messages> = {
-  ko: koMessages as unknown as Messages,
-  en: enMessages as unknown as Messages,
-};
-
-function getNestedValue(obj: unknown, path: string): string {
-  const keys = path.split('.');
-  let current: unknown = obj;
-  for (const key of keys) {
-    if (current && typeof current === 'object' && key in (current as Record<string, unknown>)) {
-      current = (current as Record<string, unknown>)[key];
-    } else {
-      return path;
-    }
-  }
-  return typeof current === 'string' ? current : path;
+interface LanguageProviderProps {
+  children: React.ReactNode;
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('pbi-locale');
-      if (saved === 'en') return 'en';
+export const LanguageProvider = ({ children }: LanguageProviderProps): ReactElement => {
+  const [language, setLanguage] = useState<Language>('ko');
+
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'ko' ? 'en' : 'ko');
+  };
+
+  const t = (key: string): string => {
+    const keys = key.split('.');
+    let value: unknown = translations[language];
+    for (const k of keys) {
+      value = (value as Record<string, unknown>)?.[k];
     }
-    return 'ko';
-  });
-
-  const setLocale = useCallback((newLocale: Locale) => {
-    setLocaleState(newLocale);
-    localStorage.setItem('pbi-locale', newLocale);
-  }, []);
-
-  const toggleLocale = useCallback(() => {
-    setLocaleState((prev) => {
-      const next = prev === 'ko' ? 'en' : 'ko';
-      localStorage.setItem('pbi-locale', next);
-      return next;
-    });
-  }, []);
-
-  const messages = allMessages[locale];
-
-  const value = useMemo(() => ({
-    locale,
-    setLocale,
-    toggleLocale,
-    messages,
-  }), [locale, setLocale, toggleLocale, messages]);
+    return (typeof value === 'string' ? value : key);
+  };
 
   return (
-    <LanguageContext.Provider value={value}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
-}
+};
 
-export function useLocale(): Locale {
+export const useLanguage = (): LanguageContextValue => {
   const context = useContext(LanguageContext);
-  if (!context) throw new Error('useLocale must be used within LanguageProvider');
-  return context.locale;
-}
-
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) throw new Error('useLanguage must be used within LanguageProvider');
+  if (!context) {
+    throw new Error('useLanguage must be used within LanguageProvider');
+  }
   return context;
-}
-
-export function useTranslations(namespace?: string) {
-  const context = useContext(LanguageContext);
-  if (!context) throw new Error('useTranslations must be used within LanguageProvider');
-
-  const t = useCallback((key: string): string => {
-    const fullPath = namespace ? `${namespace}.${key}` : key;
-    return getNestedValue(context.messages, fullPath);
-  }, [context.messages, namespace]);
-
-  return t;
-}
+};
