@@ -585,7 +585,6 @@
 
 /* ── Navbar Responsive ── */
 @media (max-width: 1100px) {
-  .nav-menu { display: none; }
   .nav-wrapper { grid-template-columns: 1fr auto; gap: var(--s-4); }
   .topbar { font-size: 11px; }
   .topbar-left { gap: var(--s-4); }
