@@ -263,9 +263,9 @@
         gap: 8px;
     }
 
-    .nav-actions .color-picker-wrapper { order: 1; }
-    .nav-actions .theme-toggle          { order: 2; }
-    .nav-actions .mobile-toggle         { order: 3; display: flex; }
+    .nav-actions .mobile-toggle         { order: 1; display: flex; }
+    .nav-actions .color-picker-wrapper { order: 2; }
+    .nav-actions .theme-toggle          { order: 3; }
     .nav-actions .nav-login-btn         { order: 4; }
     .nav-actions .nav-user-menu         { order: 4; }
 
