@@ -1,4 +1,4 @@
-import{u as v,r as n,j as e,x as d}from"./index-ClayfWd9.js";import{s as f}from"./notifications-sGWauT0-.js";const k=()=>{const{t:o,language:s}=v(),[a,p]=n.useState({name:"",email:"",phone:"",subject:"",message:""}),[c,m]=n.useState(!1),[x,u]=n.useState(!1),[h,l]=n.useState(""),i=(t,r)=>{p(j=>({...j,[t]:r}))},g=async t=>{t.preventDefault(),l(""),m(!0);try{const r=await f({to:"pbi240426@gmail.com",subject:`[문의] ${a.subject}`,html:`
+import{u as v,r as n,j as e,x as d}from"./index-DmQTzq_u.js";import{s as f}from"./notifications-Wl7r3YzE.js";const k=()=>{const{t:o,language:s}=v(),[a,p]=n.useState({name:"",email:"",phone:"",subject:"",message:""}),[c,m]=n.useState(!1),[x,u]=n.useState(!1),[h,l]=n.useState(""),i=(t,r)=>{p(j=>({...j,[t]:r}))},g=async t=>{t.preventDefault(),l(""),m(!0);try{const r=await f({to:"pbi240426@gmail.com",subject:`[문의] ${a.subject}`,html:`
           <h3>웹사이트 문의</h3>
           <table style="width:100%;border-collapse:collapse;">
             <tr><td style="padding:8px;border:1px solid #ddd;font-weight:600;width:120px;">이름</td><td style="padding:8px;border:1px solid #ddd;">${a.name}</td></tr>
