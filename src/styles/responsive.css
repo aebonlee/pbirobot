@@ -263,7 +263,7 @@
         gap: 8px;
     }
 
-    .nav-actions .mobile-toggle         { order: 1; display: flex; }
+    .nav-actions .mobile-toggle         { order: 1; display: flex; margin-right: auto; }
     .nav-actions .color-picker-wrapper { order: 2; }
     .nav-actions .theme-toggle          { order: 3; }
     .nav-actions .nav-login-btn         { order: 4; }
